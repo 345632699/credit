@@ -17,17 +17,18 @@
                 <el-form-item label="内容详情">
                     <quill-editor ref="myTextEditor" v-model="form.content" :options="editorOption"></quill-editor>
                 </el-form-item>
+                <el-form-item label="标签">
+                    <el-input type="text" v-model="form.tag"></el-input>
+                </el-form-item>
                 <el-form-item label="分类">
-                    <el-select v-model="form.classify" placeholder="请选择">
-                        <el-option v-for="(item, index) in classify_list" :key="index" :label="item.name" :value="item._id"></el-option>
-                        <el-option key="xtc" label="小天才" value="xtc"></el-option>
-                        <el-option key="imoo" label="imoo" value="imoo"></el-option>
+                    <el-select v-model="form.classifyIndex" placeholder="请选择" @change="onChange">
+                        <el-option v-for="(item, index) in classify_list" :key="index" :label="item.name" :value="index"></el-option>
                     </el-select>
                     <label for="" class="addClassify" @click="visible = true">添加分类</label>
                 </el-form-item>
                 <el-form-item label="语言">
-                    <el-select v-model="form.language" placeholder="请选择">
-                        <el-option v-for="(item, index) in language_list" :key="index" :label="item.name" :value="item._id"></el-option>
+                    <el-select v-model="form.languageIndex" placeholder="请选择" @change="onChangeLanguage">
+                        <el-option v-for="(item, index) in language_list" :key="index" :label="item.name" :value="index"></el-option>
                     </el-select>
                     <label for="" class="addClassify" @click="langVisible = true">添加语言</label>
                 </el-form-item>
@@ -78,10 +79,13 @@ export default {
       language_list: [],
       classify_list: [],
       form: {
-        title: '333333',
-        content: '内容',
-        classify: '',
-        language: ''
+        title: '',
+        content: '',
+        categoryId: '',
+        categoryName: '',
+        languageId: '',
+        tag: '',
+        languageName: ''
       },
       classify_name: '',
       lang_name: '',
@@ -94,12 +98,24 @@ export default {
     quillEditor
   },
   created () {
+    console.log(this.$parent.tagsList)
+    this.$parent.tagsList = []
+    console.log(this.$parent.tagsList)
     this.getLanguageList()
     this.getClassifyList()
   },
   methods: {
     onEditorChange ({ editor, html, text }) {
       this.content = html
+    },
+    onChange (e) {
+      this.form.categoryId = this.classify_list[e]._id
+      this.form.categoryName = this.classify_list[e].name
+      console.log(this.form)
+    },
+    onChangeLanguage (e) {
+      this.form.languageId = this.language_list[e]._id
+      this.form.languageName = this.language_list[e].name
     },
     addClassify () {
       api.addClassifies(this.classify_name, (d) => {
@@ -138,7 +154,16 @@ export default {
       this.langVisible = false
     },
     submit () {
-      this.$message.success('提交成功！')
+      api.addArticle(this.form, (d) => {
+        console.log(d)
+        if (d.uerr == '' || d.uerr == undefined) {
+          this.$message.success('提交成功')
+          this.$parent.tagsList = []
+          this.$router.push({ path: 'articleList' })
+        } else {
+          this.$message.error(d.ustr)
+        }
+      })
     }
   }
 }

@@ -48,12 +48,13 @@ export default {
     window.getData({
       'obj': 'article',
       'act': 'add',
-      'title': '',
-      'content': '',
-      'categoryId': '',
-      'categoryName': '',
-      'languageId': '',
-      'languageName': ''
+      'title': obj.title,
+      'content': obj.content,
+      'categoryId': obj.categoryId,
+      'categoryName': obj.categoryName,
+      'languageId': obj.languageId,
+      'tag': obj.tag ? obj.tag : 'ddd',
+      'languageName': obj.languageName
     }, (d) => {
       cb(d)
     })

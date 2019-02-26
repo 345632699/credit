@@ -7,21 +7,31 @@
         </div>
         <div class="container">
             <div class="handle-box">
-                <el-button type="primary" icon="delete" class="handle-del mr10" @click="delAll">批量删除</el-button>
-                <el-select v-model="select_cate" placeholder="筛选省份" class="handle-select mr10">
-                    <el-option key="1" label="广东省" value="广东省"></el-option>
-                    <el-option key="2" label="湖南省" value="湖南省"></el-option>
-                </el-select>
-                <el-input v-model="select_word" placeholder="筛选关键词" class="handle-input mr10"></el-input>
-                <el-button type="primary" icon="search" @click="search">搜索</el-button>
+                <!--<el-button type="primary" icon="delete" class="handle-del mr10" @click="delAll">批量删除</el-button>-->
+                <!--<el-select v-model="select_cate" placeholder="筛选省份" class="handle-select mr10">-->
+                    <!--<el-option key="1" label="广东省" value="广东省"></el-option>-->
+                    <!--<el-option key="2" label="湖南省" value="湖南省"></el-option>-->
+                <!--</el-select>-->
+                <!--<el-input v-model="select_word" placeholder="筛选关键词" class="handle-input mr10"></el-input>-->
+                <!--<el-button type="primary" icon="search" @click="search">搜索</el-button>-->
+                <el-button type="primary" icon="search" @click="() => {this.$router.push({path: '/add'})}">添加文章</el-button>
             </div>
-            <el-table :data="data" border class="table" ref="multipleTable" @selection-change="handleSelectionChange">
+            <el-table :data="articleList" border class="table" ref="multipleTable" @selection-change="handleSelectionChange">
                 <el-table-column type="selection" width="55" align="center"></el-table-column>
-                <el-table-column prop="date" label="日期" sortable width="150">
+                <el-table-column prop="type" label="作者" width="120">
                 </el-table-column>
-                <el-table-column prop="name" label="姓名" width="120">
+                <el-table-column prop="ut" label="时间" sortable width="150">
                 </el-table-column>
-                <el-table-column prop="address" label="地址" :formatter="formatter">
+                <el-table-column prop="title" label="标题" width="250">
+                </el-table-column>
+                <el-table-column prop="text" label="页面地址">
+                </el-table-column>
+                <el-table-column
+                        label="内容"
+                        >
+                    <template slot-scope="scope">
+                        <span style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis;">{{ scope.row.content }}</span>
+                    </template>
                 </el-table-column>
                 <el-table-column label="操作" width="180" align="center">
                     <template slot-scope="scope">
@@ -31,29 +41,41 @@
                 </el-table-column>
             </el-table>
             <div class="pagination">
-                <el-pagination background @current-change="handleCurrentChange" layout="prev, pager, next" :total="1000">
+                <el-pagination background @current-change="handleCurrentChange" layout="prev, pager, next" :total="total">
                 </el-pagination>
             </div>
         </div>
 
         <!-- 编辑弹出框 -->
-        <el-dialog title="编辑" :visible.sync="editVisible" width="30%">
+        <el-dialog title="编辑" :visible.sync="editVisible" width="60%">
             <el-form ref="form" :model="form" label-width="50px">
-                <el-form-item label="日期">
-                    <el-date-picker type="date" placeholder="选择日期" v-model="form.date" value-format="yyyy-MM-dd" style="width: 100%;"></el-date-picker>
-                </el-form-item>
-                <el-form-item label="姓名">
-                    <el-input v-model="form.name"></el-input>
-                </el-form-item>
-                <el-form-item label="地址">
-                    <el-input v-model="form.address"></el-input>
-                </el-form-item>
-
+                <el-form ref="form" :model="form" label-width="80px">
+                    <el-form-item label="标题">
+                        <el-input type="text" v-model="form.title"></el-input>
+                    </el-form-item>
+                    <el-form-item label="内容详情">
+                        <quill-editor ref="myTextEditor" v-model="form.content" :options="editorOption"></quill-editor>
+                    </el-form-item>
+                    <el-form-item label="分类">
+                        <el-select v-model="form.categoryName" placeholder="请选择" @change="onChange">
+                            <el-option v-for="(item, index) in classify_list" :key="index" :label="item.name" :value="index"></el-option>
+                        </el-select>
+                    </el-form-item>
+                    <el-form-item label="语言">
+                        <el-select v-model="form.languageName" placeholder="请选择" @change="onChangeLanguage">
+                            <el-option v-for="(item, index) in language_list" :key="index" :label="item.name" :value="index"></el-option>
+                        </el-select>
+                    </el-form-item>
+                    <el-form-item>
+                        <el-button type="primary" @click="saveEdit">确认提交</el-button>
+                        <el-button @click="editVisible = false">取 消</el-button>
+                    </el-form-item>
+                </el-form>
             </el-form>
-            <span slot="footer" class="dialog-footer">
-                <el-button @click="editVisible = false">取 消</el-button>
-                <el-button type="primary" @click="saveEdit">确 定</el-button>
-            </span>
+            <!--<span slot="footer" class="dialog-footer">-->
+                <!--<el-button @click="editVisible = false">取 消</el-button>-->
+                <!--<el-button type="primary" @click="saveEdit">确 定</el-button>-->
+            <!--</span>-->
         </el-dialog>
 
         <!-- 删除提示框 -->
@@ -69,7 +91,10 @@
 
 <script>
 /* eslint-disable camelcase */
-
+import 'quill/dist/quill.core.css'
+import 'quill/dist/quill.snow.css'
+import 'quill/dist/quill.bubble.css'
+import { quillEditor } from 'vue-quill-editor'
 import api from './server.js'
 export default {
   name: 'basetable',
@@ -77,6 +102,9 @@ export default {
     return {
       url: './vuetable.json',
       tableData: [],
+      articleList: [],
+      language_list: [],
+      classify_list: [],
       cur_page: 1,
       multipleSelection: [],
       select_cate: '',
@@ -85,20 +113,24 @@ export default {
       is_search: false,
       editVisible: false,
       delVisible: false,
+      editorOption: {
+        placeholder: '输入正文'
+      },
       form: {
         name: '',
         date: '',
         address: ''
       },
       idx: -1,
+      total: 0,
       pageInit: {
         page: 1,
         limit: 10
-      }
+      },
+      currentRow: ''
     }
   },
-  created () {
-    this.getData()
+  mounted () {
     this.getList(this.pageInit)
   },
   computed: {
@@ -122,11 +154,18 @@ export default {
       })
     }
   },
+  components: {
+    quillEditor
+  },
   methods: {
     // 分页导航
     handleCurrentChange (val) {
       this.cur_page = val
-      this.getData()
+      let pageInit = {
+        page: val,
+        limit: 10
+      }
+      this.getList(pageInit)
     },
     // 获取 easy-mock 的模拟数据
     getData () {
@@ -150,17 +189,24 @@ export default {
       return row.tag === value
     },
     handleEdit (index, row) {
+      this.getLanguageList()
+      this.getClassifyList()
       this.idx = index
-      const item = this.tableData[index]
+      const item = this.articleList[index]
       this.form = {
-        name: item.name,
-        date: item.date,
-        address: item.address
+        title: item.title,
+        content: item.content,
+        articleId: item._id,
+        languageId: item.languageId,
+        languageName: item.languageName,
+        categoryName: item.categoryName,
+        categoryId: item.categoryId
       }
       this.editVisible = true
     },
     handleDelete (index, row) {
       this.idx = index
+      this.currentRow = row
       this.delVisible = true
     },
     delAll () {
@@ -178,20 +224,54 @@ export default {
     },
     // 保存编辑
     saveEdit () {
-      this.$set(this.tableData, this.idx, this.form)
+      console.log(this.form)
+      api.edit(this.form, (d) => {
+        this.getList(this.pageInit)
+        this.$message.success(`修改成功`)
+      })
       this.editVisible = false
-      this.$message.success(`修改第 ${this.idx + 1} 行成功`)
     },
     // 确定删除
     deleteRow () {
+      let id = this.articleList[this.idx]._id
       this.tableData.splice(this.idx, 1)
-      this.$message.success('删除成功')
+      api.delete(id, (d) => {
+        this.$message.success('删除成功')
+      })
       this.delVisible = false
     },
     getList (pageInit) {
       api.list(pageInit.page, pageInit.limit, (d) => {
         console.log(d)
+        this.total = d.total
+        this.articleList = d.list
       })
+    },
+    getLanguageList () {
+      api.langList((d) => {
+        console.log(d)
+        this.language_list = d.list
+      })
+    },
+    getClassifyList () {
+      api.classifiesList((d) => {
+        console.log(d)
+        this.classify_list = d.list
+      })
+    },
+    onChange (e) {
+      this.form.categoryId = this.classify_list[e]._id
+      this.form.categoryName = this.classify_list[e].name
+      console.log(this.form)
+    },
+    onChangeLanguage (e) {
+      this.form.languageId = this.language_list[e]._id
+      this.form.languageName = this.language_list[e].name
+    }
+  },
+  watch: {
+    $route (to, from) {
+      this.getList(this.pageInit)
     }
   }
 }

@@ -6,7 +6,7 @@ let router = new Router({
   routes: [
     {
       path: '/',
-      redirect: '/add'
+      redirect: '/articleList'
     },
     {
       path: '/',
@@ -24,9 +24,9 @@ let router = new Router({
           meta: { title: '自定义图标' }
         },
         {
-          path: '/table',
+          path: '/articleList',
           component: resolve => require(['../components/page/Article/List/index.vue'], resolve),
-          meta: { title: '基础表格' }
+          meta: { title: '文章列表' }
         },
         {
           path: '/tabs',
@@ -48,7 +48,7 @@ let router = new Router({
           // 富文本编辑器组件
           path: '/add',
           component: resolve => require(['../components/page/Article/Add/index.vue'], resolve),
-          meta: { title: '富文本编辑器' }
+          meta: { title: '添加文章' }
         },
         {
           // markdown组件
