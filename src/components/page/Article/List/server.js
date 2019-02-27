@@ -18,6 +18,14 @@ export default {
       cb(d)
     })
   },
+  menuList (cb) {
+    window.getData({
+      'obj': 'bindMenu',
+      'act': 'list'
+    }, (d) => {
+      cb(d)
+    })
+  },
   get (id, cb) {
     window.getData({
       'obj': 'get',

@@ -14,6 +14,21 @@
                 <el-form-item label="标题">
                     <el-input type="text" v-model="form.title"></el-input>
                 </el-form-item>
+                <el-form-item label="封面图">
+                    <el-upload
+                        action="http://148.72.64.80/cgi-bin/upload.pl"
+                        list-type="picture-card"
+                        name="local_file"
+                        :file-list="file_list"
+                        :on-preview="handlePictureCardPreview"
+                        :on-success="successcover"
+                        :on-remove="handleRemove">
+                        <i class="el-icon-plus"></i>
+                    </el-upload>
+                    <el-dialog :visible.sync="dialogVisible">
+                        <img width="100%" :src="dialogImageUrl" alt="">
+                    </el-dialog>
+                </el-form-item>
                 <el-form-item label="内容详情">
                     <quill-editor ref="myTextEditor" v-model="form.content" :options="editorOption"></quill-editor>
                 </el-form-item>
@@ -31,6 +46,11 @@
                         <el-option v-for="(item, index) in language_list" :key="index" :label="item.name" :value="index"></el-option>
                     </el-select>
                     <label for="" class="addClassify" @click="langVisible = true">添加语言</label>
+                </el-form-item>
+                <el-form-item label="文章分类">
+                    <el-select v-model="form.ownershipMenuId" placeholder="请选择">
+                        <el-option v-for="(item, index) in menu_list" :key="index" :label="item.name" :value="item._id"></el-option>
+                    </el-select>
                 </el-form-item>
                 <el-form-item>
                     <el-button type="primary" @click="submit">确认提交</el-button>
@@ -77,7 +97,11 @@ export default {
       visible: false,
       langVisible: false,
       language_list: [],
+      menu_list: [],
       classify_list: [],
+      file_list: [],
+      dialogImageUrl: '',
+      dialogVisible: false,
       form: {
         title: '',
         content: '',
@@ -85,7 +109,9 @@ export default {
         categoryName: '',
         languageId: '',
         tag: '',
-        languageName: ''
+        languageName: '',
+        coverFid: '',
+        ownershipMenuId: ''
       },
       classify_name: '',
       lang_name: '',
@@ -103,10 +129,17 @@ export default {
     console.log(this.$parent.tagsList)
     this.getLanguageList()
     this.getClassifyList()
+    this.getMenuList()
   },
   methods: {
     onEditorChange ({ editor, html, text }) {
       this.content = html
+    },
+    getMenuList () {
+      api.menuList((d) => {
+        console.log(d)
+        this.menu_list = d.list
+      })
     },
     onChange (e) {
       this.form.categoryId = this.classify_list[e]._id
@@ -164,6 +197,16 @@ export default {
           this.$message.error(d.ustr)
         }
       })
+    },
+    successcover (response, file, fileList) {
+      this.form.coverFid = response.fid
+    },
+    handleRemove (file, fileList) {
+      console.log(file, fileList)
+    },
+    handlePictureCardPreview (file) {
+      this.dialogImageUrl = file.url
+      this.dialogVisible = true
     }
   }
 }
@@ -179,5 +222,28 @@ export default {
 
     .editor-btn {
         margin-top: 20px;
+    }
+    .avatar-uploader .el-upload {
+        border: 1px dashed #d9d9d9;
+        border-radius: 6px;
+        cursor: pointer;
+        position: relative;
+        overflow: hidden;
+    }
+    .avatar-uploader .el-upload:hover {
+        border-color: #409EFF;
+    }
+    .avatar-uploader-icon {
+        font-size: 28px;
+        color: #8c939d;
+        width: 178px;
+        height: 178px;
+        line-height: 178px;
+        text-align: center;
+    }
+    .avatar {
+        width: 178px;
+        height: 178px;
+        display: block;
     }
 </style>

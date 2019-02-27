@@ -35,6 +35,14 @@ export default {
       cb(d)
     })
   },
+  menuList (cb) {
+    window.getData({
+      'obj': 'bindMenu',
+      'act': 'list'
+    }, (d) => {
+      cb(d)
+    })
+  },
   langDel (name, cb) {
     window.getData({
       'obj': 'language',
@@ -53,8 +61,10 @@ export default {
       'categoryId': obj.categoryId,
       'categoryName': obj.categoryName,
       'languageId': obj.languageId,
-      'tag': obj.tag ? obj.tag : 'ddd',
-      'languageName': obj.languageName
+      'tag': obj.tag,
+      'coverFid': obj.coverFid,
+      'languageName': obj.languageName,
+      'ownershipMenuId': obj.ownershipMenuId
     }, (d) => {
       cb(d)
     })

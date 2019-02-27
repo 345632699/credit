@@ -18,7 +18,7 @@
             </div>
             <el-table :data="articleList" border class="table" ref="multipleTable" @selection-change="handleSelectionChange">
                 <el-table-column type="selection" width="55" align="center"></el-table-column>
-                <el-table-column prop="type" label="作者" width="120">
+                <el-table-column prop="author" label="作者" width="120">
                 </el-table-column>
                 <el-table-column prop="ut" label="时间" sortable width="150">
                 </el-table-column>
@@ -53,8 +53,26 @@
                     <el-form-item label="标题">
                         <el-input type="text" v-model="form.title"></el-input>
                     </el-form-item>
+                    <el-form-item label="封面图">
+                        <el-upload
+                            action="http://148.72.64.80/cgi-bin/upload.pl"
+                            list-type="picture-card"
+                            name="local_file"
+                            :on-preview="handlePictureCardPreview"
+                            :on-success="successcover"
+                            :file-list="file_list"
+                            :on-remove="handleRemove">
+                            <i class="el-icon-plus"></i>
+                        </el-upload>
+                        <el-dialog :visible.sync="dialogVisible">
+                            <img width="100%" :src="dialogImageUrl" alt="">
+                        </el-dialog>
+                    </el-form-item>
                     <el-form-item label="内容详情">
                         <quill-editor ref="myTextEditor" v-model="form.content" :options="editorOption"></quill-editor>
+                    </el-form-item>
+                    <el-form-item label="标签">
+                        <el-input type="text" v-model="form.tag"></el-input>
                     </el-form-item>
                     <el-form-item label="分类">
                         <el-select v-model="form.categoryName" placeholder="请选择" @change="onChange">
@@ -64,6 +82,11 @@
                     <el-form-item label="语言">
                         <el-select v-model="form.languageName" placeholder="请选择" @change="onChangeLanguage">
                             <el-option v-for="(item, index) in language_list" :key="index" :label="item.name" :value="index"></el-option>
+                        </el-select>
+                    </el-form-item>
+                    <el-form-item label="文章分类">
+                        <el-select v-model="form.ownershipMenuId" placeholder="请选择">
+                            <el-option v-for="(item, index) in menu_list" :key="index" :label="item.name" :value="item._id"></el-option>
                         </el-select>
                     </el-form-item>
                     <el-form-item>
@@ -104,6 +127,8 @@ export default {
       tableData: [],
       articleList: [],
       language_list: [],
+      menu_list: [],
+      file_list: [],
       classify_list: [],
       cur_page: 1,
       multipleSelection: [],
@@ -145,8 +170,8 @@ export default {
         }
         if (!is_del) {
           if (d.address.indexOf(this.select_cate) > -1 &&
-                            (d.name.indexOf(this.select_word) > -1 ||
-                                d.address.indexOf(this.select_word) > -1)
+            (d.name.indexOf(this.select_word) > -1 ||
+              d.address.indexOf(this.select_word) > -1)
           ) {
             return d
           }
@@ -191,16 +216,21 @@ export default {
     handleEdit (index, row) {
       this.getLanguageList()
       this.getClassifyList()
+      this.getMenuList()
       this.idx = index
       const item = this.articleList[index]
       this.form = {
         title: item.title,
         content: item.content,
         articleId: item._id,
+        coverFid: item.coverFid,
+        tag: item.tag,
+        ownershipMenuId: item.ownershipMenuId,
         languageId: item.languageId,
         languageName: item.languageName,
         categoryName: item.categoryName,
-        categoryId: item.categoryId
+        categoryId: item.categoryId,
+        file_list: [{ url: 'http://148.72.64.80/cgi-bin/download.pl?fid=' + item.ownershipMenuId }]
       }
       this.editVisible = true
     },
@@ -259,6 +289,12 @@ export default {
         this.classify_list = d.list
       })
     },
+    getMenuList () {
+      api.menuList((d) => {
+        console.log(d)
+        this.menu_list = d.list
+      })
+    },
     onChange (e) {
       this.form.categoryId = this.classify_list[e]._id
       this.form.categoryName = this.classify_list[e].name
@@ -267,6 +303,16 @@ export default {
     onChangeLanguage (e) {
       this.form.languageId = this.language_list[e]._id
       this.form.languageName = this.language_list[e].name
+    },
+    successcover (response, file, fileList) {
+      this.form.coverFid = response.fid
+    },
+    handleRemove (file, fileList) {
+      console.log(file, fileList)
+    },
+    handlePictureCardPreview (file) {
+      this.dialogImageUrl = file.url
+      this.dialogVisible = true
     }
   },
   watch: {
