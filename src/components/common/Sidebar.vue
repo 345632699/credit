@@ -52,6 +52,11 @@ export default {
           icon: 'el-icon-lx-cascades',
           index: 'add',
           title: '文章上传'
+        },
+        {
+          icon: 'el-icon-lx-cascades',
+          index: 'category',
+          title: '菜单分类'
         }
         // {
         //   icon: 'el-icon-lx-copy',

@@ -46,6 +46,12 @@ let router = new Router({
         },
         {
           // 富文本编辑器组件
+          path: '/category',
+          component: resolve => require(['../components/page/Category/Index/index.vue'], resolve),
+          meta: { title: '富文本编辑器' }
+        },
+        {
+          // 富文本编辑器组件
           path: '/add',
           component: resolve => require(['../components/page/Article/Add/index.vue'], resolve),
           meta: { title: '添加文章' }
