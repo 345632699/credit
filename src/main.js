@@ -34,9 +34,9 @@ router.beforeEach((to, from, next) => {
   //     next()
   //   }
   // }
-  // if (to.name === 'fontIndex') {
-  //   next()
-  // }
+  if (to.name === 'fontIndex') {
+    next()
+  }
   if (to.path !== '/login') {
     if (window.isLogin) {
       next()
