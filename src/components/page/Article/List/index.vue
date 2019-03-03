@@ -16,7 +16,7 @@
                 <!--<el-button type="primary" icon="search" @click="search">搜索</el-button>-->
                 <el-button type="primary" icon="search" @click="() => {this.$router.push({path: '/add'})}">添加文章</el-button>
             </div>
-            <el-table :data="articleList" border class="table" ref="multipleTable" @selection-change="handleSelectionChange">
+            <el-table v-loading="loading" :data="articleList" border class="table" ref="multipleTable" @selection-change="handleSelectionChange">
                 <el-table-column type="selection" width="55" align="center"></el-table-column>
                 <el-table-column prop="author" label="作者" width="120">
                 </el-table-column>
@@ -24,7 +24,7 @@
                 </el-table-column>
                 <el-table-column prop="title" label="标题" width="250">
                 </el-table-column>
-                <el-table-column prop="text" label="页面地址">
+                <el-table-column prop="tag" label="标签">
                 </el-table-column>
                 <el-table-column
                         label="内容"
@@ -138,6 +138,9 @@ export default {
       is_search: false,
       editVisible: false,
       delVisible: false,
+      loading: false,
+      dialogImageUrl: '',
+      dialogVisible: false,
       editorOption: {
         placeholder: '输入正文'
       },
@@ -183,6 +186,19 @@ export default {
     quillEditor
   },
   methods: {
+    timestampToTime (timestamp) {
+      var date = new Date(timestamp * 1000) // 时间戳为10位需*1000，时间戳为13位的话不需乘1000
+      var Y = date.getFullYear() + '-'
+      var M =
+    (date.getMonth() + 1 < 10
+      ? '0' + (date.getMonth() + 1)
+      : date.getMonth() + 1) + '-'
+      var D = date.getDate() + ' '
+      var h = date.getHours() + ':'
+      var m = date.getMinutes() + ':'
+      var s = date.getSeconds()
+      return Y + M + D + h + m + s
+    },
     // 分页导航
     handleCurrentChange (val) {
       this.cur_page = val
@@ -266,15 +282,21 @@ export default {
       let id = this.articleList[this.idx]._id
       this.tableData.splice(this.idx, 1)
       api.delete(id, (d) => {
+        this.getList(this.pageInit)
         this.$message.success('删除成功')
       })
       this.delVisible = false
     },
     getList (pageInit) {
+      this.loading = true
       api.list(pageInit.page, pageInit.limit, (d) => {
-        console.log(d)
         this.total = d.total
+        let that = this
+        d.list.forEach(item => {
+          item.ut = that.timestampToTime(item.ut).slice(0, 10)
+        })
         this.articleList = d.list
+        this.loading = false
       })
     },
     getLanguageList () {

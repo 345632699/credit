@@ -110,6 +110,11 @@ let router = new Router({
       component: resolve => require(['../components/page/Login.vue'], resolve)
     },
     {
+      path: '/font/index',
+      name: 'fontIndex',
+      component: resolve => require(['../components/page/Font/index.vue'], resolve)
+    },
+    {
       path: '*',
       redirect: '/404'
     }

@@ -40,8 +40,7 @@ var APIConnection = function () {
   this.this_req = this.last_req = this.response = null
   this.MAX_RESPONSE_TIME = 15
   this.MINDER_TIME = 5
-  this.credential = function (a,
-                              b) {
+  this.credential = function (a, b) {
     this.login_name = a
     this.login_passwd = b
     this.registration = this.user_info = this.credential_data = null
