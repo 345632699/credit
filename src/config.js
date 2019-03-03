@@ -5,4 +5,4 @@ export const wsUrl = `ws://${url}:${port}/${projectName}`
 export const homePage = '/'
 export const username = 'test1'
 export const passwd = '1'
-export const debug = true
+export const debug = false

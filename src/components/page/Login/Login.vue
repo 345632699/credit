@@ -27,8 +27,8 @@ export default {
   data: function () {
     return {
       ruleForm: {
-        username: 'admin',
-        password: '123123'
+        username: 'test1',
+        password: '1'
       },
       rules: {
         username: [
@@ -44,6 +44,7 @@ export default {
     submitForm (formName) {
       this.$refs[formName].validate((valid) => {
         if (valid) {
+          console.log(3333)
           window.server.login(this.ruleForm.username, this.ruleForm.password, (data) => {
             this.$router.push('/')
           })
@@ -62,7 +63,7 @@ export default {
         position: relative;
         width:100%;
         height:100%;
-        background-image: url(../../assets/img/login-bg.jpg);
+        background-image: url(../../../assets/img/login-bg.jpg);
         background-size: 100%;
     }
     .ms-title{
