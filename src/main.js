@@ -34,7 +34,6 @@ router.beforeEach((to, from, next) => {
   //     next()
   //   }
   // }
-
   if (to.path !== '/login') {
     if (window.isLogin) {
       next()

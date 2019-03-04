@@ -16,7 +16,7 @@
                 <!--<el-button type="primary" icon="search" @click="search">搜索</el-button>-->
                 <el-button type="primary" icon="search" @click="() => {this.$router.push({path: '/add'})}">添加文章</el-button>
             </div>
-            <el-table :data="articleList" border class="table" ref="multipleTable" @selection-change="handleSelectionChange">
+            <el-table v-loading="loading" :data="articleList" border class="table" ref="multipleTable" @selection-change="handleSelectionChange">
                 <el-table-column type="selection" width="55" align="center"></el-table-column>
                 <el-table-column prop="author" label="作者" width="120">
                 </el-table-column>
@@ -24,7 +24,7 @@
                 </el-table-column>
                 <el-table-column prop="title" label="标题" width="250">
                 </el-table-column>
-                <el-table-column prop="text" label="页面地址">
+                <el-table-column prop="tag" label="标签">
                 </el-table-column>
                 <el-table-column
                         label="内容"
@@ -60,10 +60,13 @@
                             name="local_file"
                             :on-preview="handlePictureCardPreview"
                             :on-success="successcover"
-                            :file-list="form.file_list"
+                            :file-list="file_list"
                             :on-remove="handleRemove">
                             <i class="el-icon-plus"></i>
                         </el-upload>
+                        <el-dialog :visible.sync="dialogVisible">
+                            <img width="100%" :src="dialogImageUrl" alt="">
+                        </el-dialog>
                     </el-form-item>
                     <el-form-item label="内容详情">
                         <quill-editor ref="myTextEditor" v-model="form.content" :options="editorOption"></quill-editor>
@@ -96,9 +99,6 @@
                 <!--<el-button @click="editVisible = false">取 消</el-button>-->
                 <!--<el-button type="primary" @click="saveEdit">确 定</el-button>-->
             <!--</span>-->
-        </el-dialog>
-        <el-dialog :visible.sync="dialogVisible">
-            <img width="100%" :src="dialogImageUrl" alt="">
         </el-dialog>
 
         <!-- 删除提示框 -->
@@ -138,6 +138,7 @@ export default {
       is_search: false,
       editVisible: false,
       delVisible: false,
+      loading: false,
       dialogImageUrl: '',
       dialogVisible: false,
       editorOption: {
@@ -146,8 +147,7 @@ export default {
       form: {
         name: '',
         date: '',
-        address: '',
-        file_list: []
+        address: ''
       },
       idx: -1,
       total: 0,
@@ -186,6 +186,19 @@ export default {
     quillEditor
   },
   methods: {
+    timestampToTime (timestamp) {
+      var date = new Date(timestamp * 1000) // 时间戳为10位需*1000，时间戳为13位的话不需乘1000
+      var Y = date.getFullYear() + '-'
+      var M =
+    (date.getMonth() + 1 < 10
+      ? '0' + (date.getMonth() + 1)
+      : date.getMonth() + 1) + '-'
+      var D = date.getDate() + ' '
+      var h = date.getHours() + ':'
+      var m = date.getMinutes() + ':'
+      var s = date.getSeconds()
+      return Y + M + D + h + m + s
+    },
     // 分页导航
     handleCurrentChange (val) {
       this.cur_page = val
@@ -222,8 +235,6 @@ export default {
       this.getMenuList()
       this.idx = index
       const item = this.articleList[index]
-      let url = 'http://148.72.64.80/cgi-bin/download.pl?proj=credit&fid=' + item.coverFid
-      console.log(url)
       this.form = {
         title: item.title,
         content: item.content,
@@ -235,7 +246,7 @@ export default {
         languageName: item.languageName,
         categoryName: item.categoryName,
         categoryId: item.categoryId,
-        file_list: [{ url: url }]
+        file_list: [{ url: 'http://148.72.64.80/cgi-bin/download.pl?fid=' + item.ownershipMenuId }]
       }
       this.editVisible = true
     },
@@ -271,15 +282,21 @@ export default {
       let id = this.articleList[this.idx]._id
       this.tableData.splice(this.idx, 1)
       api.delete(id, (d) => {
+        this.getList(this.pageInit)
         this.$message.success('删除成功')
       })
       this.delVisible = false
     },
     getList (pageInit) {
+      this.loading = true
       api.list(pageInit.page, pageInit.limit, (d) => {
-        console.log(d)
         this.total = d.total
+        let that = this
+        d.list.forEach(item => {
+          item.ut = that.timestampToTime(item.ut).slice(0, 10)
+        })
         this.articleList = d.list
+        this.loading = false
       })
     },
     getLanguageList () {

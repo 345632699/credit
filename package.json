@@ -47,6 +47,7 @@
       "no-restricted-syntax": ["error", "SequenceExpression"],
       "no-unused-expressions": 0,
       "no-restricted-globals": ["error", "event", "fdescribe"]
+      "no-tabs": 0
     },
     "parserOptions": {
       "parser": "babel-eslint"
