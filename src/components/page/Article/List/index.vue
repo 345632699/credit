@@ -60,13 +60,10 @@
                             name="local_file"
                             :on-preview="handlePictureCardPreview"
                             :on-success="successcover"
-                            :file-list="file_list"
+                            :file-list="form.file_list"
                             :on-remove="handleRemove">
                             <i class="el-icon-plus"></i>
                         </el-upload>
-                        <el-dialog :visible.sync="dialogVisible">
-                            <img width="100%" :src="dialogImageUrl" alt="">
-                        </el-dialog>
                     </el-form-item>
                     <el-form-item label="内容详情">
                         <quill-editor ref="myTextEditor" v-model="form.content" :options="editorOption"></quill-editor>
@@ -99,6 +96,9 @@
                 <!--<el-button @click="editVisible = false">取 消</el-button>-->
                 <!--<el-button type="primary" @click="saveEdit">确 定</el-button>-->
             <!--</span>-->
+        </el-dialog>
+        <el-dialog :visible.sync="dialogVisible">
+            <img width="100%" :src="dialogImageUrl" alt="">
         </el-dialog>
 
         <!-- 删除提示框 -->
@@ -138,13 +138,16 @@ export default {
       is_search: false,
       editVisible: false,
       delVisible: false,
+      dialogImageUrl: '',
+      dialogVisible: false,
       editorOption: {
         placeholder: '输入正文'
       },
       form: {
         name: '',
         date: '',
-        address: ''
+        address: '',
+        file_list: []
       },
       idx: -1,
       total: 0,
@@ -219,6 +222,8 @@ export default {
       this.getMenuList()
       this.idx = index
       const item = this.articleList[index]
+      let url = 'http://148.72.64.80/cgi-bin/download.pl?proj=credit&fid=' + item.coverFid
+      console.log(url)
       this.form = {
         title: item.title,
         content: item.content,
@@ -230,7 +235,7 @@ export default {
         languageName: item.languageName,
         categoryName: item.categoryName,
         categoryId: item.categoryId,
-        file_list: [{ url: 'http://148.72.64.80/cgi-bin/download.pl?fid=' + item.ownershipMenuId }]
+        file_list: [{ url: url }]
       }
       this.editVisible = true
     },

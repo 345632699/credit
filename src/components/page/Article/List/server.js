@@ -59,11 +59,15 @@ export default {
       'act': 'modify',
       'title': obj.title,
       'content': obj.content,
+      'coverFid': obj.coverFid,
       'categoryId': obj.categoryId,
       'categoryName': obj.categoryName,
       'languageId': obj.languageId,
       'articleId': obj.articleId,
-      'languageName': obj.languageName
+      'languageName': obj.languageName,
+      'ownershipMenuId': obj.ownershipMenuId,
+      'ownershipMenuName': obj.ownershipMenuName,
+      'tag': obj.tag
     }, (d) => {
       cb(d)
     })

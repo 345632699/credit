@@ -45,7 +45,8 @@
       "eqeqeq": 1,
       "no-mixed-operators": [0],
       "no-restricted-syntax": ["error", "SequenceExpression"],
-      "no-unused-expressions": 0
+      "no-unused-expressions": 0,
+      "no-restricted-globals": ["error", "event", "fdescribe"]
     },
     "parserOptions": {
       "parser": "babel-eslint"
