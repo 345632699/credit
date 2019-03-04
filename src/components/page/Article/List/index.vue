@@ -158,8 +158,11 @@ export default {
       currentRow: ''
     }
   },
-  mounted () {
+  async mounted () {
     this.getList(this.pageInit)
+    await this.getLanguageList()
+    await this.getClassifyList()
+    await this.getMenuList()
   },
   computed: {
     data () {
@@ -229,10 +232,7 @@ export default {
     filterTag (value, row) {
       return row.tag === value
     },
-    handleEdit (index, row) {
-      this.getLanguageList()
-      this.getClassifyList()
-      this.getMenuList()
+    async handleEdit (index, row) {
       this.idx = index
       const item = this.articleList[index]
       this.form = {
@@ -299,19 +299,19 @@ export default {
         this.loading = false
       })
     },
-    getLanguageList () {
+    async getLanguageList () {
       api.langList((d) => {
         console.log(d)
         this.language_list = d.list
       })
     },
-    getClassifyList () {
+    async getClassifyList () {
       api.classifiesList((d) => {
         console.log(d)
         this.classify_list = d.list
       })
     },
-    getMenuList () {
+    async getMenuList () {
       api.menuList((d) => {
         console.log(d)
         this.menu_list = d.list

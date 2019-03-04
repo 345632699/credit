@@ -52,36 +52,37 @@
                                 v-for="(itemThree,indexThree) in itemTwo.child"
                                 :key="indexThree"
                                 :index="itemThree._id"
-                        >{{itemThree.name}}</el-menu-item>
+                                @click="test(itemThree)">{{itemThree.name}}</el-menu-item>
                     </el-submenu>
                     <el-menu-item
                             v-for="(itemTwo,indexTwo) in item.child"
                             :key="indexTwo"
-                            :index="itemTwo._id"
                             v-if="itemTwo.child == ''"
-                    >{{itemTwo.name}}</el-menu-item>
+                            :index="itemTwo._id"
+                            @click="test(itemTwo)">{{itemTwo.name}}</el-menu-item>
                 </el-submenu>
                 <el-menu-item v-for="(item,index) in list"
-                              :key="index"
-                              v-if="item.child == ''"
-                              :index="item._id">{{ item.name }}</el-menu-item>
+                            :key="index"
+                            v-if="item.child == ''"
+                            :index="item._id"
+                            @click="test(item)">{{ item.name }}</el-menu-item>
             </el-menu>
 		</el-row>
 
         <div class="article-list">
 			<el-row>
 				<el-col :lg="16" :md="24">
-					<div class="article-item">
-						<div class="title">千年平安京一览大唐气象——京都漆樓わかさや町屋入住体验</div>
+					<div class="article-item" v-for="(item,index) in article_list" :key="index">
+						<div class="title">{{item.title}}</div>
 						<div class="record">
-							<i class="icon el-icon-date"></i><span class="text">Aleph</span>
-							<i class="icon el-icon-time"></i><span class="text">2019-03-02</span>
-							<i class="icon el-icon-refresh"></i><span class="text">2019-03-02</span>
+							<i class="icon el-icon-date"></i><span class="text">{{item.author}}</span>
+							<i class="icon el-icon-time"></i><span class="text">{{item.ut}}</span>
+							<i class="icon el-icon-refresh"></i><span class="text">{{item.ut}}</span>
 							<i class="icon el-icon-news"></i><span class="text">32 Comments</span>
 						</div>
 						<div class="flex">
 							<div class="left">
-								<img src="https://i0.wp.com/www.uscreditcardguide.com/wp-content/uploads/IMG_7321.jpg?zoom=2&resize=300%2C189&ssl=1" alt="">
+								<img :src="'http://148.72.64.80/cgi-bin/download.pl?fid=' + item.coverFid" alt="">
 							</div>
 							<div class="right">
 								<div class="content-text">
@@ -90,33 +91,33 @@
 								<el-button class="btn" size="small" type="primary">read more</el-button>
 							</div>
 							<div class="footer">
-								酒店体验
+								{{item.tag ? item.tag : item.ut}}
 							</div>
 						</div>
 					</div>
-					<div class="article-item">
-						<div class="title">千年平安京一览大唐气象——京都漆樓わかさや町屋入住体验</div>
-						<div class="record">
-							<i class="icon el-icon-date"></i><span class="text">Aleph</span>
-							<i class="icon el-icon-time"></i><span class="text">2019-03-02</span>
-							<i class="icon el-icon-refresh"></i><span class="text">2019-03-02</span>
-							<i class="icon el-icon-news"></i><span class="text">32 Comments</span>
-						</div>
-						<div class="flex">
-							<div class="left">
-								<img src="https://i0.wp.com/www.uscreditcardguide.com/wp-content/uploads/IMG_7321.jpg?zoom=2&resize=300%2C189&ssl=1" alt="">
-							</div>
-							<div class="right">
-								<div class="content-text">
-									上洛   平安时代，桓武天皇定都平安京，依唐都长安和东都洛阳风水布局，从此京都被视为日本古代文化之高地。作为忠诚度为零的万豪雅高洲际白金、希尔顿钻石、凯悦环球客，笔者来到京都会选择下榻哪间酒店呢？答案是，一个都不榻！到了京都，自然应该体验最纯正最地道的日本和室居所。京都御三家（俵屋、柊家、炭屋）、要庵西富、吉田山庄……嗯，这些奢华的日式旅馆我一个都住不起……于是打开Airbnb，在477…
-								</div>
-								<el-button class="btn" size="small" type="primary">read more</el-button>
-							</div>
-							<div class="footer">
-								酒店体验
-							</div>
-						</div>
-					</div>
+					<!--<div class="article-item">-->
+						<!--<div class="title">千年平安京一览大唐气象——京都漆樓わかさや町屋入住体验</div>-->
+						<!--<div class="record">-->
+							<!--<i class="icon el-icon-date"></i><span class="text">Aleph</span>-->
+							<!--<i class="icon el-icon-time"></i><span class="text">2019-03-02</span>-->
+							<!--<i class="icon el-icon-refresh"></i><span class="text">2019-03-02</span>-->
+							<!--<i class="icon el-icon-news"></i><span class="text">32 Comments</span>-->
+						<!--</div>-->
+						<!--<div class="flex">-->
+							<!--<div class="left">-->
+								<!--<img src="https://i0.wp.com/www.uscreditcardguide.com/wp-content/uploads/IMG_7321.jpg?zoom=2&resize=300%2C189&ssl=1" alt="">-->
+							<!--</div>-->
+							<!--<div class="right">-->
+								<!--<div class="content-text">-->
+									<!--上洛   平安时代，桓武天皇定都平安京，依唐都长安和东都洛阳风水布局，从此京都被视为日本古代文化之高地。作为忠诚度为零的万豪雅高洲际白金、希尔顿钻石、凯悦环球客，笔者来到京都会选择下榻哪间酒店呢？答案是，一个都不榻！到了京都，自然应该体验最纯正最地道的日本和室居所。京都御三家（俵屋、柊家、炭屋）、要庵西富、吉田山庄……嗯，这些奢华的日式旅馆我一个都住不起……于是打开Airbnb，在477…-->
+								<!--</div>-->
+								<!--<el-button class="btn" size="small" type="primary">read more</el-button>-->
+							<!--</div>-->
+							<!--<div class="footer">-->
+								<!--酒店体验-->
+							<!--</div>-->
+						<!--</div>-->
+					<!--</div>-->
 				</el-col>
 				<el-col :lg="8" :md="24">
 					<div class="in-search">
@@ -130,21 +131,31 @@
 								:fetch-suggestions="querySearch"
 								placeholder="请输入内容"
 								@select="handleSelect">
-							<i
-									class="el-icon-search el-input__icon"
-									slot="suffix"
-									@click="handleIconClick">
-							</i>
-							<template slot-scope="{ item }">
-								<div class="name">{{ item.value }}</div>
-								<span class="addr">{{ item.address }}</span>
-							</template>
+							<!--<i-->
+									<!--class="el-icon-search el-input__icon"-->
+									<!--slot="suffix"-->
+									<!--@click="handleIconClick">-->
+							<!--</i>-->
+							<!--<template slot-scope="{ item }">-->
+								<!--<div class="name">{{ item.value }}</div>-->
+								<!--<span class="addr">{{ item.address }}</span>-->
+							<!--</template>-->
 						</el-autocomplete>
 					</div>
 				</el-col>
 			</el-row>
 		</div>
-
+		<div class="" style="width:100%;background: #ffffff;padding: 10px">
+			<div class="page-container" style="margin: auto;max-width: 1200px">
+				<el-pagination
+						background
+						:page-sizes="10"
+						@current-change="handleCurrentChange"
+						layout="prev, pager, next"
+						:total="total">
+				</el-pagination>
+			</div>
+		</div>
 	</div>
 
 </template>
@@ -157,8 +168,15 @@ export default {
     return {
       activeIndex: '1',
       activeIndex2: '',
-      state3: '1',
-      list: []
+      state3: '',
+      list: [],
+      pageInit: {
+        page: 1,
+        limit: 10
+      },
+      cur_page: 1,
+      total: 1,
+      article_list: []
     }
   },
   methods: {
@@ -170,12 +188,45 @@ export default {
     },
     querySearch () {
 
+    },
+    test (e) {
+      console.log(e)
+    },
+    handleCurrentChange (val) {
+      this.cur_page = val
+      this.pageInit.page = val
+      this.getArticle(this.pageInit)
+    },
+    timestampToTime (timestamp) {
+      var date = new Date(timestamp * 1000) // 时间戳为10位需*1000，时间戳为13位的话不需乘1000
+      var Y = date.getFullYear() + '-'
+      var M =
+          (date.getMonth() + 1 < 10
+            ? '0' + (date.getMonth() + 1)
+            : date.getMonth() + 1) + '-'
+      var D = date.getDate() + ' '
+      var h = date.getHours() + ':'
+      var m = date.getMinutes() + ':'
+      var s = date.getSeconds()
+      return Y + M + D + h + m + s
+    },
+    getArticle (pageInit) {
+      let that = this
+      api.homeArticleList(pageInit.page, pageInit.limit, (d) => {
+        d.list.forEach(item => {
+          item.ut = that.timestampToTime(item.ut).slice(0, 10)
+        })
+        this.article_list = d.list
+        this.total = d.total
+      })
     }
   },
   created () {
     api.list((d) => {
       this.list = d.list
     })
+    this.pageInit.page = 1
+    this.getArticle(this.pageInit)
   }
 }
 </script>
