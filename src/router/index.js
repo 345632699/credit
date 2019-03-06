@@ -48,7 +48,7 @@ let router = new Router({
           // 富文本编辑器组件
           path: '/category',
           component: resolve => require(['../components/page/Category/Index/index.vue'], resolve),
-          meta: { title: '富文本编辑器' }
+          meta: { title: '菜单分类' }
         },
         {
           // 富文本编辑器组件

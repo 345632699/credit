@@ -46,6 +46,7 @@
       "no-mixed-operators": [0],
       "no-restricted-syntax": ["error", "SequenceExpression"],
       "no-unused-expressions": 0,
+      "no-restricted-globals": ["error", "event", "fdescribe"],
       "no-tabs": 0
     },
     "parserOptions": {
