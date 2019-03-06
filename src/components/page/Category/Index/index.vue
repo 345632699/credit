@@ -16,6 +16,12 @@
                             <el-tag type="info" class="my-tag" @click="modifyDialog(navMenu)">编辑</el-tag>
                             <el-tag type="primary" class="my-tag" @click.native="showDialog(navMenu._id)">添加</el-tag>
                         </el-menu-item>
+                        <el-menu-item v-if="navMenu.menuType == 3" :index="navMenu.name">
+                            <span slot="title">{{navMenu.name}}</span>
+                            <el-tag type="danger" class="my-tag" @click="deleteMenu(navMenu._id)" >删除</el-tag>
+                            <el-tag type="info" class="my-tag" @click="modifyDialog(navMenu)">编辑</el-tag>
+                            <el-tag type="primary" class="my-tag" @click.native="showDialog(navMenu._id)">添加</el-tag>
+                        </el-menu-item>
                         <el-submenu v-if="navMenu.menuType == 1" :index="navMenu.name">
                             <template slot="title">
                                 <span>{{navMenu.name}}</span>
