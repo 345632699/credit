@@ -38,7 +38,7 @@
                     background-color="#333333"
                     text-color="#fff"
                     active-text-color="#ffd04b">
-                <el-menu-item @click="home">
+                <el-menu-item @click="home" index="index">
                     首页
                 </el-menu-item>
                 <el-submenu
@@ -77,7 +77,7 @@
             </el-menu>
         </el-row>
 
-        <div class="article-list">
+        <div class="article-list" v-loading="loading">
             <el-row>
                 <el-col v-if="displayDesc" :lg="16" :md="24">
                     <div class="article-content">
@@ -104,7 +104,7 @@
                         </div>
                     </div>
                 </el-col>
-                <el-col v-else :lg="16" :md="24">
+                <el-col v-else :lg="16" :md="24" style="min-height: 800px;">
                     <div class="article-item" v-for="(item,index) in article_list" :key="index">
                         <div class="title">{{item.title}}</div>
                         <div class="record">
@@ -183,8 +183,9 @@ export default {
       activeIndex2: '',
       state3: '',
       list: [],
+      loading: false,
       pageInit: {
-        page: 1,
+        page: '1',
         limit: '10'
       },
       displayDesc: false,
@@ -205,15 +206,23 @@ export default {
 
     },
     home () {
-      this.pageInit.page = 1
-      this.getArticle(this.pageInit)
+      this.loading = true
+      api.list((d) => {
+        this.list = d.list
+      })
+      this.getArticle({
+        page: '1',
+        limit: '10'
+      })
     },
     readMore (id) {
+      this.loading = true
       api.article(id, (d) => {
         this.articleInfo = d.article
         this.articleInfo.ut = this.timestampToTime(this.articleInfo.ut).slice(0, 10)
         this.articleInfo.ct = this.timestampToTime(this.articleInfo.ct).slice(0, 10)
         this.displayDesc = true
+        this.loading = false
       })
     },
     op (item) {
@@ -221,6 +230,7 @@ export default {
       if (item.menuType === 2) {
         let that = this
         this.pageInit = 1
+        this.loading = true
         api.articleByMenuId(item._id, this.pageInit.page, this.pageInit.limit, (d) => {
           d.list.forEach(item => {
             item.ut = that.timestampToTime(item.ut).slice(0, 10)
@@ -228,14 +238,17 @@ export default {
           this.article_list = d.list
           this.total = d.total
           this.displayDesc = false
+          this.loading = false
         })
       }
       if (item.menuType == 3) {
+        this.loading = true
         api.articleInfoByMenuId(item._id, (d) => {
           this.articleInfo = d.article
           this.articleInfo.ut = this.timestampToTime(this.articleInfo.ut).slice(0, 10)
           this.articleInfo.ct = this.timestampToTime(this.articleInfo.ct).slice(0, 10)
           this.displayDesc = true
+          this.loading = false
         })
       }
     },
@@ -258,6 +271,7 @@ export default {
       return Y + M + D + h + m + s
     },
     getArticle (pageInit) {
+      this.loading = true
       let that = this
       api.homeArticleList(pageInit.page, pageInit.limit, (d) => {
         d.list.forEach(item => {
@@ -266,10 +280,12 @@ export default {
         this.article_list = d.list
         this.total = d.total
         this.displayDesc = false
+        this.loading = false
       })
     }
   },
   created () {
+    this.loading = true
     api.list((d) => {
       this.list = d.list
     })

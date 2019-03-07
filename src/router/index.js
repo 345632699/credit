@@ -110,8 +110,8 @@ let router = new Router({
       component: resolve => require(['../components/page/Login/Login.vue'], resolve)
     },
     {
-      path: '/font/index',
-      name: 'fontIndex',
+      path: '/front/index',
+      name: 'frontIndex',
       component: resolve => require(['../components/page/Font/index.vue'], resolve)
     },
     {

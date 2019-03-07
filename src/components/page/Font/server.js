@@ -1,47 +1,54 @@
+import request from './request'
+import { wsUrl } from '../../../config'
+const ws = new WebSocket(wsUrl)
 export default {
   list (cb) {
-    window.getData({
+    let attr = {
       'obj': 'homeMenu',
       'act': 'list'
-    }, (d) => {
-      cb(d)
-    })
+    }
+    request.requestData(ws, attr, cb)
   },
   homeArticleList (page = 1, limit = '10', cb) {
-    window.getData({
+    let attr = {
       'obj': 'homeArticle',
       'act': 'list',
       'page': page,
       'limit': limit
-    }, (d) => {
-      cb(d)
-    })
+    }
+    request.requestData(ws, attr, cb)
   },
   articleByMenuId (id, page = 1, limit = '10', cb) {
-    window.getData({
+    let attr = {
       'obj': 'articleByMenuId',
       'act': 'list',
-      'menuId': id
-    }, (d) => {
-      cb(d)
-    })
+      'menuId': id,
+      'page': page,
+      'limit': limit
+    }
+    request.requestData(ws, attr, cb)
   },
   articleInfoByMenuId (id, cb) {
-    window.getData({
+    let attr = {
       'obj': 'articleByMenuId',
       'act': 'info',
       'menuId': id
-    }, (d) => {
-      cb(d)
-    })
+    }
+    request.requestData(ws, attr, cb)
   },
   article (id, cb) {
-    window.getData({
+    let attr = {
       'obj': 'article',
       'act': 'get',
       'articleId': id
-    }, (d) => {
-      cb(d)
-    })
+    }
+    request.requestData(ws, attr, cb)
+  },
+  websocket (cb) {
+    let attr = {
+      'obj': 'homeMenu',
+      'act': 'list'
+    }
+    request.requestData(ws, attr, cb)
   }
 }

@@ -34,7 +34,11 @@ router.beforeEach((to, from, next) => {
   //     next()
   //   }
   // }
-  if (to.path !== '/login') {
+  if (to.name === 'frontIndex') {
+    console.log(3333)
+    next()
+  } else if (to.path !== '/login') {
+    console.log(334444)
     if (window.isLogin) {
       next()
     } else {
