@@ -28,6 +28,16 @@ export default {
     }
     request.requestData(ws, attr, cb)
   },
+  artucleSearch (keyword, page = 1, limit = '10', cb) {
+    let attr = {
+      'obj': 'articleSearch',
+      'act': 'list',
+      'searchWord': keyword,
+      'page': page,
+      'limit': limit
+    }
+    request.requestData(ws, attr, cb)
+  },
   articleInfoByMenuId (id, cb) {
     let attr = {
       'obj': 'articleByMenuId',

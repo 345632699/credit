@@ -5,27 +5,22 @@
                 <el-row>
                     <el-col class="logo" :span="18">
                         <img width="40%"
-                             src="https://pgo1b3ii48f1ua79w2tv3s71-wpengine.netdna-ssl.com/wp-content/uploads/logo-horizontal-zh-min.png"
+                             src="@/assets/img/bg.png"
                              alt="">
                     </el-col>
                     <el-col :span="6">
-                        <el-autocomplete
+                        <el-input
                                 class="search"
                                 popper-class="my-autocomplete"
-                                v-model="state3"
-                                :fetch-suggestions="querySearch"
+                                v-model="pageInit.keyword"
                                 placeholder="请输入内容"
-                                @select="handleSelect">
+                               >
                             <i
                                     class="el-icon-search el-input__icon"
                                     slot="suffix"
                                     @click="handleIconClick">
                             </i>
-                            <template slot-scope="{ item }">
-                                <div class="name">{{ item.value }}</div>
-                                <span class="addr">{{ item.address }}</span>
-                            </template>
-                        </el-autocomplete>
+                        </el-input>
                     </el-col>
                 </el-row>
             </div>
@@ -105,7 +100,7 @@
                     </div>
                 </el-col>
                 <el-col v-else :lg="16" :md="24" style="min-height: 800px;">
-                    <div class="article-item" v-for="(item,index) in article_list" :key="index">
+                    <div v-if="article_list.length > 0" class="article-item" v-for="(item,index) in article_list" :key="index">
                         <div class="title">{{item.title}}</div>
                         <div class="record">
                             <i class="icon el-icon-date"></i><span class="text">{{item.author}}</span>
@@ -119,8 +114,7 @@
                             </div>
                             <div class="right">
                                 <div class="content-text">
-                                    上洛
-                                    平安时代，桓武天皇定都平安京，依唐都长安和东都洛阳风水布局，从此京都被视为日本古代文化之高地。作为忠诚度为零的万豪雅高洲际白金、希尔顿钻石、凯悦环球客，笔者来到京都会选择下榻哪间酒店呢？答案是，一个都不榻！到了京都，自然应该体验最纯正最地道的日本和室居所。京都御三家（俵屋、柊家、炭屋）、要庵西富、吉田山庄……嗯，这些奢华的日式旅馆我一个都住不起……于是打开Airbnb，在477…
+                                    {{ item.content }}
                                 </div>
                                 <el-button @click="readMore(item._id)" class="btn" size="small" type="primary">read
                                     more
@@ -131,29 +125,28 @@
                             </div>
                         </div>
                     </div>
+                    <div v-if="article_list.length === 0" style="text-align: center;padding: 20px;margin-top:30px;background: #ffffff">
+                        暂无搜索结果
+                    </div>
                 </el-col>
                 <el-col :lg="8" :md="24">
                     <div class="in-search">
                         <div class="title">
                             站内搜索
                         </div>
-                        <el-autocomplete
+                        <el-input
                                 class="inner-search"
                                 popper-class="my-autocomplete"
                                 v-model="state3"
-                                :fetch-suggestions="querySearch"
                                 placeholder="请输入内容"
-                                @select="handleSelect">
-                            <!--<i-->
-                            <!--class="el-icon-search el-input__icon"-->
-                            <!--slot="suffix"-->
-                            <!--@click="handleIconClick">-->
-                            <!--</i>-->
-                            <!--<template slot-scope="{ item }">-->
-                            <!--<div class="name">{{ item.value }}</div>-->
-                            <!--<span class="addr">{{ item.address }}</span>-->
-                            <!--</template>-->
-                        </el-autocomplete>
+                                style="width: 300px"
+                               >
+                            <i
+                                    class="el-icon-search el-input__icon"
+                                    slot="suffix"
+                                    @click="searchIn">
+                            </i>
+                        </el-input>
                     </div>
                 </el-col>
             </el-row>
@@ -175,7 +168,10 @@
 <script>
 import api from './server'
 import 'element-ui/lib/theme-chalk/display.css'
-
+import utils from '@/utils/utils'
+const SEARCH_LIST = 1
+const ARTICLE_LIST = 2
+const MEMU_ARTICLE_LIST = 3
 export default {
   data () {
     return {
@@ -186,24 +182,34 @@ export default {
       loading: false,
       pageInit: {
         page: '1',
-        limit: '10'
+        limit: '10',
+        menuId: '',
+        keyword: ''
       },
       displayDesc: false,
       cur_page: 1,
       total: 1,
       article_list: [],
-      articleInfo: {}
+      articleInfo: {},
+      currentList: ''
     }
   },
   methods: {
     handleSelect (key, keyPath) {
       console.log(key, keyPath)
     },
-    handleIconClick (key, keyPath) {
-      console.log(key, keyPath)
+    handleIconClick () {
+      this.pageInit.page = 1
+      this.search(this.pageInit)
+      this.currentList = SEARCH_LIST
     },
     querySearch () {
 
+    },
+    searchIn () {
+      this.message.info({
+        title: '功能待开发'
+      })
     },
     home () {
       this.loading = true
@@ -219,6 +225,7 @@ export default {
       this.loading = true
       api.article(id, (d) => {
         this.articleInfo = d.article
+        this.articleInfo.content = utils.imgTagAddStyle(this.articleInfo.content)
         this.articleInfo.ut = this.timestampToTime(this.articleInfo.ut).slice(0, 10)
         this.articleInfo.ct = this.timestampToTime(this.articleInfo.ct).slice(0, 10)
         this.displayDesc = true
@@ -228,23 +235,18 @@ export default {
     op (item) {
       console.log(item)
       if (item.menuType === 2) {
-        let that = this
-        this.pageInit = 1
+        console.log(item._id)
+        this.pageInit.page = 1
+        this.pageInit.menuId = item._id
         this.loading = true
-        api.articleByMenuId(item._id, this.pageInit.page, this.pageInit.limit, (d) => {
-          d.list.forEach(item => {
-            item.ut = that.timestampToTime(item.ut).slice(0, 10)
-          })
-          this.article_list = d.list
-          this.total = d.total
-          this.displayDesc = false
-          this.loading = false
-        })
+        this.memuArticleList(this.pageInit)
+        this.currentList = MEMU_ARTICLE_LIST
       }
       if (item.menuType == 3) {
         this.loading = true
         api.articleInfoByMenuId(item._id, (d) => {
           this.articleInfo = d.article
+          this.articleInfo.content = utils.imgTagAddStyle(d.article.content)
           this.articleInfo.ut = this.timestampToTime(this.articleInfo.ut).slice(0, 10)
           this.articleInfo.ct = this.timestampToTime(this.articleInfo.ct).slice(0, 10)
           this.displayDesc = true
@@ -252,10 +254,44 @@ export default {
         })
       }
     },
+    memuArticleList (pageInit) {
+      let that = this
+      console.log('pageInit', pageInit)
+      api.articleByMenuId(pageInit.menuId, pageInit.page, pageInit.limit, (d) => {
+        d.list.forEach(item => {
+          item.ut = that.timestampToTime(item.ut).slice(0, 10)
+          item.content = item.content.replace(/<[^>]+>/g, '')
+        })
+        this.article_list = d.list
+        this.total = d.total
+        this.displayDesc = false
+        this.loading = false
+      })
+    },
+    search () {
+      let that = this
+      this.loading = true
+      api.artucleSearch(this.pageInit.keyword, this.pageInit.page, this.pageInit.limit, (d) => {
+        d.list.forEach(item => {
+          item.ut = that.timestampToTime(item.ut).slice(0, 10)
+          item.content = item.content.replace(/<[^>]+>/g, '')
+        })
+        this.article_list = d.list
+        this.total = d.total
+        this.displayDesc = false
+        this.loading = false
+      })
+    },
     handleCurrentChange (val) {
       this.cur_page = val
       this.pageInit.page = val
-      this.getArticle(this.pageInit)
+      if (this.currentList === SEARCH_LIST) {
+        this.search(this.pageInit)
+      } else if (this.currentList === ARTICLE_LIST) {
+        this.getArticle(this.pageInit)
+      } else if (this.currentList === MEMU_ARTICLE_LIST) {
+        this.memuArticleList(this.pageInit)
+      }
     },
     timestampToTime (timestamp) {
       var date = new Date(timestamp * 1000) // 时间戳为10位需*1000，时间戳为13位的话不需乘1000
@@ -276,11 +312,13 @@ export default {
       api.homeArticleList(pageInit.page, pageInit.limit, (d) => {
         d.list.forEach(item => {
           item.ut = that.timestampToTime(item.ut).slice(0, 10)
+          item.content = item.content.replace(/<[^>]+>/g, '')
         })
         this.article_list = d.list
         this.total = d.total
         this.displayDesc = false
         this.loading = false
+        this.currentList = ARTICLE_LIST
       })
     }
   },
@@ -431,9 +469,13 @@ export default {
                         .content-text {
                             width: auto;
                             height: 100%;
-                            padding: 10px 20px;
+                            padding: 10px 20px 0;
                             box-sizing: border-box;
                             text-align: justify;
+                            display: -webkit-box;
+                            -webkit-box-orient: vertical;
+                            -webkit-line-clamp: 14;
+                            overflow: hidden;
                         }
                         .btn {
                             margin-top: 15px;
