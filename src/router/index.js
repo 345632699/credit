@@ -6,7 +6,7 @@ let router = new Router({
   routes: [
     {
       path: '/',
-      redirect: '/articleList'
+      redirect: '/front/index'
     },
     {
       path: '/',
@@ -105,7 +105,7 @@ let router = new Router({
       ]
     },
     {
-      path: '/login',
+      path: '/console',
       name: 'login',
       component: resolve => require(['../components/page/Login/Login.vue'], resolve)
     },
@@ -113,6 +113,11 @@ let router = new Router({
       path: '/front/index',
       name: 'frontIndex',
       component: resolve => require(['../components/page/Font/index.vue'], resolve)
+    },
+    {
+      path: '/front/detail',
+      name: 'frontDetail',
+      component: resolve => require(['../components/page/Font/detail.vue'], resolve)
     },
     {
       path: '*',

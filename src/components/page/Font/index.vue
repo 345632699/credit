@@ -75,7 +75,7 @@
         <div class="article-list" v-loading="loading">
             <el-row>
                 <el-col v-if="displayDesc" :lg="16" :md="24">
-                    <div class="article-content">
+                    <div class="article-content" v-if="articleInfo !== null">
                         <div class="title">
                             {{articleInfo.title}}
                         </div>
@@ -84,36 +84,39 @@
                                 <i class="icon el-icon-date"></i><span class="text">{{articleInfo.author}}}</span>
                                 <i class="icon el-icon-time"></i><span class="text">{{articleInfo.ct}}</span>
                                 <i class="icon el-icon-refresh"></i><span class="text">{{articleInfo.ut}}</span>
-                                <i class="icon el-icon-news"></i><span class="text">32 Comments</span>
+                                <!--<i class="icon el-icon-news"></i><span class="text">32 Comments</span>-->
                             </div>
                             <div class="tag">
                                 <div class="left"><i class="el-icon-menu"></i>{{articleInfo.ownershipMenuName}}</div>
                                 <div class="right">{{articleInfo.tag}}</div>
                             </div>
                             <div class="bg-img">
-                                <img :src="'http://148.72.64.80/cgi-bin/download.pl?fid=' + articleInfo.coverFid"
+                                <img :src="'http://148.72.64.80/cgi-bin/download.pl?proj=credit&fid=' + articleInfo.coverFid"
                                      alt="">
                             </div>
                             <div class="descripiton" v-html="articleInfo.content">
                             </div>
                         </div>
                     </div>
+                    <div v-if="articleInfo === null" style="text-align: center;padding: 20px;margin-top:30px;background: #ffffff">
+                        暂无搜索结果
+                    </div>
                 </el-col>
                 <el-col v-else :lg="16" :md="24" style="min-height: 800px;">
                     <div v-if="article_list.length > 0" class="article-item" v-for="(item,index) in article_list" :key="index">
-                        <div class="title">{{item.title}}</div>
+                        <div class="title" @click="readMore(item._id)">{{item.title}}</div>
                         <div class="record">
                             <i class="icon el-icon-date"></i><span class="text">{{item.author}}</span>
                             <i class="icon el-icon-time"></i><span class="text">{{item.ut}}</span>
                             <i class="icon el-icon-refresh"></i><span class="text">{{item.ut}}</span>
-                            <i class="icon el-icon-news"></i><span class="text">32 Comments</span>
+                            <!--<i class="icon el-icon-news"></i><span class="text">32 Comments</span>-->
                         </div>
                         <div class="flex">
-                            <div class="left">
-                                <img :src="'http://148.72.64.80/cgi-bin/download.pl?fid=' + item.coverFid" alt="">
+                            <div class="left" @click="readMore(item._id)">
+                                <img :src="'http://148.72.64.80/cgi-bin/download.pl?proj=credit&fid=' + item.coverFid" alt="">
                             </div>
                             <div class="right">
-                                <div class="content-text">
+                                <div class="content-text" @click="readMore(item._id)">
                                     {{ item.content }}
                                 </div>
                                 <el-button @click="readMore(item._id)" class="btn" size="small" type="primary">read
@@ -121,7 +124,8 @@
                                 </el-button>
                             </div>
                             <div class="footer">
-                                {{item.tag ? item.tag : item.ut}}
+                                <div class="menu" @click="getCatList(item.ownershipMenuId)">{{ item.ownershipMenuName }}</div>
+                                <div class="tag">{{item.tag ? item.tag : item.ut}}</div>
                             </div>
                         </div>
                     </div>
@@ -221,6 +225,29 @@ export default {
         limit: '10'
       })
     },
+    getCatList (id) {
+      this.pageInit.menuId = id
+      this.getMenuArticleList(this.pageInit)
+    },
+    getMenuArticleList (pageInit) {
+      let that = this
+      api.articleByCategoryId(pageInit.menuId, pageInit.page, pageInit.limit, (d) => {
+        if (d.list.length > 0) {
+          d.list.forEach(item => {
+            item.ut = that.timestampToTime(item.ut).slice(0, 10)
+            item.content = item.content.replace(/<[^>]+>/g, '')
+          })
+        }
+        console.log(333333)
+        console.log(d)
+        console.log(d.list)
+        that.article_list = d.list
+        that.total = d.total
+        that.displayDesc = false
+        that.loading = false
+        that.currentList = 4
+      })
+    },
     readMore (id) {
       this.loading = true
       api.article(id, (d) => {
@@ -235,23 +262,30 @@ export default {
     op (item) {
       console.log(item)
       if (item.menuType === 2) {
-        console.log(item._id)
-        this.pageInit.page = 1
-        this.pageInit.menuId = item._id
-        this.loading = true
-        this.memuArticleList(this.pageInit)
-        this.currentList = MEMU_ARTICLE_LIST
-      }
-      if (item.menuType == 3) {
         this.loading = true
         api.articleInfoByMenuId(item._id, (d) => {
+          console.log(d)
+          console.log(d.article)
+          this.total = 0
           this.articleInfo = d.article
+          if (this.articleInfo === null) {
+            this.displayDesc = true
+            this.loading = false
+            return
+          }
           this.articleInfo.content = utils.imgTagAddStyle(d.article.content)
           this.articleInfo.ut = this.timestampToTime(this.articleInfo.ut).slice(0, 10)
           this.articleInfo.ct = this.timestampToTime(this.articleInfo.ct).slice(0, 10)
           this.displayDesc = true
           this.loading = false
         })
+      }
+      if (item.menuType == 3) {
+        this.loading = true
+        this.pageInit.page = 1
+        this.pageInit.menuId = item._id
+        this.memuArticleList(this.pageInit)
+        this.currentList = MEMU_ARTICLE_LIST
       }
     },
     memuArticleList (pageInit) {
@@ -291,6 +325,8 @@ export default {
         this.getArticle(this.pageInit)
       } else if (this.currentList === MEMU_ARTICLE_LIST) {
         this.memuArticleList(this.pageInit)
+      } else {
+        this.getMenuArticleList(this.pageInit)
       }
     },
     timestampToTime (timestamp) {
@@ -437,7 +473,9 @@ export default {
                 width: auto;
                 .title {
                     color: #437bd0;
-                    font-size: 20px;
+                    font-size: 23px;
+                    line-height: 100%;
+                    margin: 0 0 7px;
                 }
                 .record {
                     .icon {
@@ -457,24 +495,28 @@ export default {
                     margin-top: 10px;
                     .left {
                         float: left;
-                        width: 45%;
+                        width: 300px;
+                        height: 189px;
+                        overflow:hidden;
                         img {
-                            width: 100%;
+                            width: 300px;
+                            max-width: 300px;
                         }
                     }
                     .right {
                         float: right;
                         margin-top: -13px;
-                        width: 55%;
+                        max-width: 55%;
                         .content-text {
                             width: auto;
-                            height: 100%;
-                            padding: 10px 20px 0;
+                            height: 205px;
+                            padding: 10px 0;
                             box-sizing: border-box;
                             text-align: justify;
+                            font-size: 16px;
                             display: -webkit-box;
                             -webkit-box-orient: vertical;
-                            -webkit-line-clamp: 14;
+                            -webkit-line-clamp: 9;
                             overflow: hidden;
                         }
                         .btn {
@@ -490,6 +532,17 @@ export default {
                         clear: both;
                         position: relative;
                         color: #999;
+                        width: 100%;
+                        .menu{
+                            width: 50%;
+                            text-align: left;
+                            display: inline-block;
+                        }
+                        .tag{
+                            width: 50%;
+                            text-align: right;
+                            display: inline-block;
+                        }
                         &:before {
                             content: "";
                             position: absolute;

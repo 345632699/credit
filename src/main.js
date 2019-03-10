@@ -34,15 +34,15 @@ router.beforeEach((to, from, next) => {
   //     next()
   //   }
   // }
-  if (to.name === 'frontIndex') {
+  if (to.name === 'frontIndex' || to.name === 'frontDetail') {
     console.log(3333)
     next()
-  } else if (to.path !== '/login') {
+  } else if (to.path !== '/console') {
     console.log(334444)
     if (window.isLogin) {
       next()
     } else {
-      next('/login')
+      next('/console')
     }
   } else {
     // 简单的判断IE10及以下不进入富文本编辑器，该组件不兼容

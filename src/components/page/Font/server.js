@@ -46,6 +46,16 @@ export default {
     }
     request.requestData(ws, attr, cb)
   },
+  articleByCategoryId (id, page = 1, limit = 0, cb) {
+    let attr = {
+      'obj': 'articleByCategoryId',
+      'act': 'list',
+      'categoryId': id,
+      'page': page,
+      'limit': limit
+    }
+    request.requestData(ws, attr, cb)
+  },
   article (id, cb) {
     let attr = {
       'obj': 'article',

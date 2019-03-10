@@ -46,7 +46,7 @@ export default {
         if (valid) {
           console.log(3333)
           window.server.login(this.ruleForm.username, this.ruleForm.password, (data) => {
-            this.$router.push('/')
+            this.$router.push('/articleList')
           })
         } else {
           console.log('error submit!!')
