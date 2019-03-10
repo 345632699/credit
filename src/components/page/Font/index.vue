@@ -3,7 +3,7 @@
         <div class="header-container">
             <div class="header">
                 <el-row>
-                    <el-col class="logo" :span="18">
+                    <el-col class="logo" :span="18" @click.native="home">
                         <img width="40%"
                              src="@/assets/img/bg.png"
                              alt="">
@@ -18,6 +18,7 @@
                             <i
                                     class="el-icon-search el-input__icon"
                                     slot="suffix"
+                                    style="cursor: pointer;"
                                     @click="handleIconClick">
                             </i>
                         </el-input>
@@ -87,7 +88,7 @@
                                 <!--<i class="icon el-icon-news"></i><span class="text">32 Comments</span>-->
                             </div>
                             <div class="tag">
-                                <div class="left"><i class="el-icon-menu"></i>{{articleInfo.ownershipMenuName}}</div>
+                                <div class="left"><i class="el-icon-menu"></i>{{articleInfo.categoryName}}</div>
                                 <div class="right">{{articleInfo.tag}}</div>
                             </div>
                             <div class="bg-img">
@@ -104,7 +105,7 @@
                 </el-col>
                 <el-col v-else :lg="16" :md="24" style="min-height: 800px;">
                     <div v-if="article_list.length > 0" class="article-item" v-for="(item,index) in article_list" :key="index">
-                        <div class="title" @click="readMore(item._id)">{{item.title}}</div>
+                        <div class="title" @click="readMore(item._id)" style="cursor: pointer;">{{item.title}}</div>
                         <div class="record">
                             <i class="icon el-icon-date"></i><span class="text">{{item.author}}</span>
                             <i class="icon el-icon-time"></i><span class="text">{{item.ut}}</span>
@@ -112,11 +113,11 @@
                             <!--<i class="icon el-icon-news"></i><span class="text">32 Comments</span>-->
                         </div>
                         <div class="flex">
-                            <div class="left" @click="readMore(item._id)">
+                            <div class="left" @click="readMore(item._id)" style="cursor: pointer;">
                                 <img :src="'http://148.72.64.80/cgi-bin/download.pl?proj=credit&fid=' + item.coverFid" alt="">
                             </div>
                             <div class="right">
-                                <div class="content-text" @click="readMore(item._id)">
+                                <div class="content-text" style="cursor: pointer;" @click="readMore(item._id)">
                                     {{ item.content }}
                                 </div>
                                 <el-button @click="readMore(item._id)" class="btn" size="small" type="primary">read
@@ -124,8 +125,8 @@
                                 </el-button>
                             </div>
                             <div class="footer">
-                                <div class="menu" @click="getCatList(item.ownershipMenuId)">{{ item.ownershipMenuName }}</div>
-                                <div class="tag">{{item.tag ? item.tag : item.ut}}</div>
+                                <div class="menu" style="cursor: pointer;" @click="getCatList(item.categoryId)">{{ item.categoryName }}</div>
+                                <div class="tag" style="cursor: pointer;">{{item.tag ? item.tag : item.ut}}</div>
                             </div>
                         </div>
                     </div>
@@ -148,6 +149,7 @@
                             <i
                                     class="el-icon-search el-input__icon"
                                     slot="suffix"
+                                    style="cursor: pointer;"
                                     @click="searchIn">
                             </i>
                         </el-input>
@@ -155,7 +157,7 @@
                 </el-col>
             </el-row>
         </div>
-        <div class="" style="width:100%;background: #ffffff;padding: 10px">
+        <div class="" v-if="!displayDesc" style="width:100%;background: #ffffff;padding: 10px">
             <div class="page-container" style="margin: auto;max-width: 1200px">
                 <el-pagination
                         background
@@ -231,6 +233,7 @@ export default {
     },
     getMenuArticleList (pageInit) {
       let that = this
+      this.loading = true
       api.articleByCategoryId(pageInit.menuId, pageInit.page, pageInit.limit, (d) => {
         if (d.list.length > 0) {
           d.list.forEach(item => {
@@ -238,14 +241,12 @@ export default {
             item.content = item.content.replace(/<[^>]+>/g, '')
           })
         }
-        console.log(333333)
-        console.log(d)
-        console.log(d.list)
         that.article_list = d.list
         that.total = d.total
         that.displayDesc = false
         that.loading = false
         that.currentList = 4
+        this.loading = false
       })
     },
     readMore (id) {
@@ -385,6 +386,7 @@ export default {
             max-width: 1280px;
             border-bottom: 1px solid #ddd;
             .logo {
+                cursor: pointer;
                 margin: auto;
                 padding-left: 50px;
             }
@@ -411,6 +413,7 @@ export default {
                 margin: 30px;
                 width: 95%;
                 .title {
+                    cursor: pointer;
                     background: #FFFFFF;
                     font-size: 24px;
                     font-weight: bold;
@@ -507,21 +510,22 @@ export default {
                         float: right;
                         margin-top: -13px;
                         max-width: 55%;
+                        min-width: 55%;
                         .content-text {
                             width: auto;
-                            height: 205px;
+                            max-height: 160px;
                             padding: 10px 0;
                             box-sizing: border-box;
                             text-align: justify;
                             font-size: 16px;
                             display: -webkit-box;
                             -webkit-box-orient: vertical;
-                            -webkit-line-clamp: 9;
+                            -webkit-line-clamp: 7;
                             overflow: hidden;
                         }
                         .btn {
-                            margin-top: 15px;
-                            margin-left: 10px;
+                            margin-top: 12px;
+                            margin-left: 0px;
                             background: #6596DC;
                             border: none;
                         }

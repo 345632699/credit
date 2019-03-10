@@ -55,9 +55,11 @@
                     </el-form-item>
                     <el-form-item label="封面图">
                         <el-upload
-                            action="http://148.72.64.80/cgi-bin/upload.pl"
+                            action="http://148.72.64.80/cgi-bin/upload.pl?proj=credit"
                             list-type="picture-card"
                             name="local_file"
+                            limit="1"
+                            :on-exceed="handleExceed"
                             :on-preview="handlePictureCardPreview"
                             :on-success="successcover"
                             :file-list="file_list"
@@ -246,14 +248,18 @@ export default {
         languageName: item.languageName,
         categoryName: item.categoryName,
         categoryId: item.categoryId,
-        file_list: [{ url: 'http://148.72.64.80/cgi-bin/download.pl?fid=' + item.ownershipMenuId }]
+        file_list: [{ url: 'http://148.72.64.80/cgi-bin/download.pl?proj=credit&fid=' + item.coverFid }]
       }
+      this.file_list = [{ url: 'http://148.72.64.80/cgi-bin/download.pl?proj=credit&fid=' + item.coverFid }]
       this.editVisible = true
     },
     handleDelete (index, row) {
       this.idx = index
       this.currentRow = row
       this.delVisible = true
+    },
+    handleExceed (files, fileList) {
+      this.$message.warning(`当前限制选择 1 个文件，本次选择了 ${files.length} 个文件，共选择了 ${files.length + fileList.length} 个文件`)
     },
     delAll () {
       const length = this.multipleSelection.length

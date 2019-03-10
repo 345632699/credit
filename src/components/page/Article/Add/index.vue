@@ -16,7 +16,7 @@
                 </el-form-item>
                 <el-form-item label="封面图">
                     <el-upload
-                        action="http://148.72.64.80/cgi-bin/upload.pl"
+                        action="http://148.72.64.80/cgi-bin/upload.pl?proj=credit"
                         list-type="picture-card"
                         name="local_file"
                         :file-list="file_list"
@@ -156,6 +156,7 @@ export default {
         this.classify_name = ''
         this.visible = false
         this.$message.success('添加成功！')
+        this.getClassifyList()
       })
     },
     addLanguage () {
@@ -164,6 +165,7 @@ export default {
         this.lang_name = ''
         this.langVisible = false
         this.$message.success('添加成功！')
+        this.getLanguageList()
       })
     },
     getLanguageList () {

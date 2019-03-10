@@ -384,6 +384,7 @@ export default {
 				margin: 30px;
 				width: 95%;
 				.title {
+					cursor: pointer;
 					background: #FFFFFF;
 					font-size: 24px;
 					font-weight: bold;
@@ -445,6 +446,7 @@ export default {
 				padding-bottom: 5px;
 				width: auto;
 				.title {
+					cursor: pointer;
 					color: #437bd0;
 					font-size: 23px;
 					line-height: 100%;
