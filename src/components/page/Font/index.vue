@@ -469,7 +469,7 @@ export default {
             }
             .article-item {
                 margin: 30px;
-                height: 320px;
+                min-height: 320px;
                 background: #FFFFFF;
                 padding: 20px;
                 padding-bottom: 5px;
@@ -513,7 +513,7 @@ export default {
                         min-width: 55%;
                         .content-text {
                             width: auto;
-                            max-height: 160px;
+                            height: 160px;
                             padding: 10px 0;
                             box-sizing: border-box;
                             text-align: justify;
