@@ -469,7 +469,7 @@ export default {
             }
             .article-item {
                 margin: 30px;
-                min-height: 320px;
+                height: 320px;
                 background: #FFFFFF;
                 padding: 20px;
                 padding-bottom: 5px;
