@@ -72,7 +72,6 @@
                 </el-menu-item>
             </el-menu>
         </el-row>
-
         <div class="article-list" v-loading="loading">
             <el-row>
                 <el-col v-if="displayDesc" :lg="16" :md="24">
@@ -97,6 +96,74 @@
                                      alt="">
                             </div>
                             <div class="descripiton" v-html="articleInfo.content">
+                            </div>
+                            <!--<div class="relation">-->
+                                <!--相关-->
+                            <!--</div>-->
+                            <div class="re-list">
+                                <div id="jp-relatedposts" class="jp-relatedposts" style="display: block;">
+                                    <h3 class="jp-relatedposts-headline">
+                                        <em>相关</em>
+                                    </h3>
+                                    <el-row type="flex" justify="space-around" class="jp-relatedposts-items jp-relatedposts-items-visual jp-relatedposts-grid ">
+                                        <el-col :span="8" class="jp-relatedposts-post jp-relatedposts-post0 jp-relatedposts-post-thumbs"
+                                             data-post-id="9297" data-post-format="false"><a
+                                                class="jp-relatedposts-post-a"
+                                                href="#"
+                                                title="航空里程兑换基础知识总结使用航空里程兑换奖励机票是一个很难但也很好玩的问题，虽然往往航司之间的规定也有不同，但总体上来说也还…" rel="nofollow" data-origin="76044" data-position="0"><img
+                                                class="jp-relatedposts-post-img"
+                                                src="https://i1.wp.com/www.uscreditcardguide.com/wp-content/uploads/Airbus_A380_overfly.jpg?fit=1200%2C787&amp;ssl=1&amp;resize=350%2C200"
+                                                width="350" alt="航空里程兑换基础知识总结"></a><h4
+                                                class="jp-relatedposts-post-title"><a class="jp-relatedposts-post-a"
+                                                                                      href="#"
+                                                                                      title="航空里程兑换基础知识总结使用航空里程兑换奖励机票是一个很难但也很好玩的问题，虽然往往航司之间的规定也有不同，但总体上来说也还…" rel="nofollow" data-origin="76044"
+                                                                                      data-position="0">航空里程兑换基础知识总结</a>
+                                        </h4>
+                                            <p class="jp-relatedposts-post-excerpt">
+                                                使用航空里程兑换奖励机票是一个很难但也很好玩的问题，虽然往往航司之间的规定也有不同，但总体上来说也还…</p>
+                                            <p class="jp-relatedposts-post-date" style="display: block;">2015-10-10</p>
+                                            <p class="jp-relatedposts-post-context">在“航空综述”中</p></el-col>
+                                        <el-col :span="8" class="jp-relatedposts-post jp-relatedposts-post1 jp-relatedposts-post-thumbs"
+                                             data-post-id="16175" data-post-format="false"><a
+                                                class="jp-relatedposts-post-a"
+                                                href="#"
+                                                title="贬值前的头等翱翔(第一回): CLT 机场 Admirals 休息室, JFK Courtyard 大床房。贬值前的头等翱翔 系列： 概述。 第一回：国内AA头等然并卵，JFK万怡酒店不带餐；ROA登机黑妞助…" rel="nofollow" data-origin="76044" data-position="1"><img
+                                                class="jp-relatedposts-post-img"
+                                                src="https://i1.wp.com/www.uscreditcardguide.com/wp-content/uploads/1-2.jpg?fit=1024%2C543&amp;ssl=1&amp;resize=350%2C200"
+                                                width="350"
+                                                alt="贬值前的头等翱翔(第一回): CLT 机场 Admirals 休息室, JFK Courtyard 大床房。"></a><h4
+                                                class="jp-relatedposts-post-title"><a class="jp-relatedposts-post-a"
+                                                                                      href="#"
+                                                                                      title="贬值前的头等翱翔(第一回): CLT 机场 Admirals 休息室, JFK Courtyard 大床房。贬值前的头等翱翔 系列概述。 第一回：国内AA头等然并卵，JFK万怡酒店不带餐；ROA登机黑妞助…" rel="nofollow" data-origin="76044" data-position="1">贬值前的头等翱翔(第一回):
+                                            CLT 机场 Admirals 休息室, JFK Courtyard 大床房。</a></h4>
+                                            <p class="jp-relatedposts-post-excerpt">贬值前的头等翱翔 系列： 概述。
+                                                第一回：国内AA头等然并卵，JFK万怡酒店不带餐；ROA登机黑妞助…</p>
+                                            <p class="jp-relatedposts-post-date" style="display: block;">2016-04-18</p>
+                                            <p class="jp-relatedposts-post-context">在“飞行体验”中</p></el-col>
+                                        <el-col :span="8" class="jp-relatedposts-post jp-relatedposts-post2 jp-relatedposts-post-thumbs"
+                                             data-post-id="5400" data-post-format="false"><a
+                                                class="jp-relatedposts-post-a"
+                                                href="#"
+                                                title="美国航空 American Airlines (AA) AAdvantage 里程指南AA 作为美国三大航司之一（收购 US Airways 之后其实是最大的了），大家平时坐飞机肯定也接…" rel="nofollow" data-origin="76044" data-position="2"><img
+                                                class="jp-relatedposts-post-img"
+                                                src="https://i1.wp.com/www.uscreditcardguide.com/wp-content/uploads/16374925430_1a76838c60_b.jpg?fit=1024%2C678&amp;ssl=1&amp;resize=350%2C200"
+                                                width="350" alt="美国航空 American Airlines (AA) AAdvantage 里程指南"></a><h4
+                                                class="jp-relatedposts-post-title"><a class="jp-relatedposts-post-a"
+                                                                                      href="#"
+                                                                                      title="美国航空 American Airlines (AA) AAdvantage 里程指南AA 作为美国三大航司之一（收购 US Airways 之后其实是最大的了），大家平时坐飞机肯定也接…" rel="nofollow" data-origin="76044" data-position="2">美国航空 American
+                                            Airlines (AA) AAdvantage 里程指南</a></h4>
+                                            <p class="jp-relatedposts-post-excerpt">AA 作为美国三大航司之一（收购 US Airways
+                                                之后其实是最大的了），大家平时坐飞机肯定也接…</p>
+                                            <p class="jp-relatedposts-post-date" style="display: block;">2016-10-13</p>
+                                            <p class="jp-relatedposts-post-context">在“寰宇一家 OneWorld”中</p></el-col>
+                                    </el-row>
+                                </div>
+                            </div>
+                            <div class="next-previous">
+                                <el-row type="flex" class="row-bg" justify="space-between">
+                                    <el-col class="pre" :span="3">上一页</el-col>
+                                    <el-col class="next" :span="3">下一页</el-col>
+                                </el-row>
                             </div>
                         </div>
                     </div>
@@ -169,51 +236,51 @@
                             <ul class="smart-post-list-main">
                                 <li class="smart-post-list-single-container" style="width: 100%; clear: right;">
                                     <div class="image-left-of-excerpt img-container" style="width: 155px;"><a
-                                            href="https://www.uscreditcardguide.com/citi-aadvantage-platinum-select/"><img
+                                            href="#"><img
                                             src="https://i2.wp.com/www.uscreditcardguide.com/wp-content/uploads/card.jpg?resize=150%2C95&amp;ssl=1"
                                             class="smart-post-list-image"></a></div>
                                     <div class="text-left-of-excerpt"><a
-                                            href="https://www.uscreditcardguide.com/citi-aadvantage-platinum-select/"
+                                            href="#"
                                             class="smart-post-list-title">Citi AAdvantage Platinum 信用卡【2019.2
                                         更新：5.1起10%返还将被取消】</a></div>
                                 </li>
                                 <li class="smart-post-list-single-container" style="width: 100%; clear: right;">
                                     <div class="image-left-of-excerpt img-container" style="width: 155px;"><a
-                                            href="https://www.uscreditcardguide.com/chase-ihg-premier/"><img
+                                            href="#"><img
                                             src="https://i2.wp.com/www.uscreditcardguide.com/wp-content/uploads/chase-ihg-premier-e1532539571959.jpg?resize=150%2C95&amp;ssl=1"
                                             class="smart-post-list-image"></a></div>
                                     <div class="text-left-of-excerpt"><a
-                                            href="https://www.uscreditcardguide.com/chase-ihg-premier/"
+                                            href="#"
                                             class="smart-post-list-title">Chase IHG Premier 信用卡【2019.2 更新：80k+40k+$50
                                         史高开卡奖励！】</a></div>
                                 </li>
                                 <li class="smart-post-list-single-container" style="width: 100%; clear: right;">
                                     <div class="image-left-of-excerpt img-container" style="width: 155px;"><a
-                                            href="https://www.uscreditcardguide.com/amex-platinum-delta-skymiles/"><img
+                                            href="#"><img
                                             src="https://i2.wp.com/www.uscreditcardguide.com/wp-content/uploads/platinum-delta-skymiles.png?resize=150%2C95&amp;ssl=1"
                                             class="smart-post-list-image"></a></div>
                                     <div class="text-left-of-excerpt"><a
-                                            href="https://www.uscreditcardguide.com/amex-platinum-delta-skymiles/"
+                                            href="#"
                                             class="smart-post-list-title">AmEx Platinum Delta SkyMiles 信用卡【2019.2
                                         更新：75k+$100 历史最高开卡奖励！】</a></div>
                                 </li>
                                 <li class="smart-post-list-single-container" style="width: 100%; clear: right;">
                                     <div class="image-left-of-excerpt img-container" style="width: 155px;"><a
-                                            href="https://www.uscreditcardguide.com/amex-gold-delta-skymiles/"><img
+                                            href="#"><img
                                             src="https://i2.wp.com/www.uscreditcardguide.com/wp-content/uploads/delta-skymiles.png?resize=150%2C95&amp;ssl=1"
                                             class="smart-post-list-image"></a></div>
                                     <div class="text-left-of-excerpt"><a
-                                            href="https://www.uscreditcardguide.com/amex-gold-delta-skymiles/"
+                                            href="#"
                                             class="smart-post-list-title">AmEx Gold Delta SkyMiles 信用卡【2019.2 更新：60k+$50
                                         public offer】</a></div>
                                 </li>
                                 <li class="smart-post-list-single-container" style="width: 100%; clear: right;">
                                     <div class="image-left-of-excerpt img-container" style="width: 155px;"><a
-                                            href="https://www.uscreditcardguide.com/amex-hilton-aspire/"><img
+                                            href="#"><img
                                             src="https://i2.wp.com/www.uscreditcardguide.com/wp-content/uploads/hilton-honors-aspire-credit-card.png?resize=150%2C95&amp;ssl=1"
                                             class="smart-post-list-image"></a></div>
                                     <div class="text-left-of-excerpt"><a
-                                            href="https://www.uscreditcardguide.com/amex-hilton-aspire/"
+                                            href="#"
                                             class="smart-post-list-title">AmEx Hilton Aspire 信用卡【2018.10 更新：150k
                                         开卡奖励】</a></div>
                                 </li>
@@ -233,6 +300,79 @@
                 </el-pagination>
             </div>
         </div>
+        <footer id="wrapper-footer" style="background: #333">
+            <el-row id="footer">
+                <el-row :gutter="24" type="flex" style="margin: auto" justify="space-around">
+                    <el-col :lg="8" :md="24" class="footer-widget-area footer-widget-area-1">
+                        <div id="text-14" class="widget footer-widget widget_text"><p class="footer-headline">Contact
+                            Us</p>
+                            <div class="textwidget">
+                                <div style="color:#999999">realdongming@gmail.com</div>
+                            </div>
+                        </div>
+                        <div id="text-8" class="widget footer-widget widget_text"><p class="footer-headline">
+                            Copyright</p>
+                            <div class="textwidget">
+                                <div id="copyright" class="wrapper" style="color:#999999"> Copyright © 2019 - 2019
+                                    北美懒人信用卡
+                                    by Spin Zero Limited is licensed under a <a rel="license"
+                                                                                href="https://creativecommons.org/licenses/by-nc-nd/4.0/"
+                                                                                target="_blank">Creative
+                                        Commons Attribution-NonCommercial-NoDerivatives 4.0 International
+                                        License</a>.<br>
+                                    <img alt="Creative Commons License"
+                                         src="https://pgo1b3ii48f1ua79w2tv3s71-wpengine.netdna-ssl.com/wp-content/uploads/copyright-cc-by-nc-nd.jpg"><br>
+                                </div>
+                            </div>
+                        </div>
+                    </el-col>
+                    <el-col :lg="8" :md="24" class="footer-widget-area footer-widget-area-2">
+                        <div id="text-18" class="widget footer-widget widget_text"><p class="footer-headline">
+                            Disclaimer</p>
+                            <div class="textwidget">
+                                <div style="color:#999999">Content and opinions on this site are authors/editors’ alone,
+                                    not
+                                    provided by any bank, credit card issuer, airline, hotel chain, and have not been
+                                    reviewed, approved or otherwise endorsed by any of these entities. We attempt to
+                                    keep
+                                    the information found on this site as accurate as possible, but it is user’s
+                                    liability
+                                    to verify the bonus and other credit card information in the issuer's official
+                                    website
+                                    during the application process. If you find any information incorrect or expired,
+                                    please
+                                    contact us immediately. The credit card logos are trademarks of the issuers. The
+                                    Amazon
+                                    logos are trademarks of Amazon, Inc.
+                                </div>
+                            </div>
+                        </div>
+                    </el-col>
+                    <el-col :lg="8" :md="24" class="footer-widget-area footer-widget-area-3">
+                        <div id="text-20" class="widget footer-widget widget_text"><p class="footer-headline">Advertiser
+                            Disclosure</p>
+                            <div class="textwidget">
+                                <div style="color:#999999">Some links to credit cards and other products on this website
+                                    will earn an affiliate commission or referral bonus. This compensation may impact
+                                    how
+                                    and where products appear on this site. This site does not include all credit card
+                                    issuers or all available credit card offers.
+                                </div>
+                            </div>
+                        </div>
+                        <div id="text-34" class="widget footer-widget widget_text"><p class="footer-headline">Legal</p>
+                            <div class="textwidget">
+                                <div style="color:#999999"><a
+                                        href="#"
+                                        target="_blank">Terms of Service</a> | <a
+                                        href="#"
+                                        target="_blank">Privacy Policy</a></div>
+                            </div>
+                        </div>
+                    </el-col>
+                </el-row>
+            </el-row>
+        </footer>
     </div>
 
 </template>
@@ -442,34 +582,41 @@ export default {
         background: #F1F1F1;
         border-radius: 5px;
         overflow: hidden;
+
         .header-container {
             background: #FFFFFF;
             width: 100%;
             margin: auto;
         }
+
         .header {
             margin: auto;
             padding: 30px 0;
             background: #FFFFFF;
             max-width: 1280px;
             border-bottom: 1px solid #ddd;
+
             .logo {
                 cursor: pointer;
                 margin: auto;
                 padding-left: 50px;
             }
         }
+
         .search {
             margin-top: 30px;
         }
+
         .header-nav {
             background: #333333;
             height: 60px;
+
             .el-menu-demo {
                 margin: auto;
                 max-width: 1280px;
             }
         }
+
         .article-list {
             max-width: 1280px;
             margin: auto;
@@ -477,9 +624,11 @@ export default {
             height: 100%;
             padding: 10px;
             box-sizing: border-box;
+
             .article-content {
                 margin: 30px;
                 width: 95%;
+
                 .title {
                     cursor: pointer;
                     background: #FFFFFF;
@@ -490,12 +639,15 @@ export default {
                     overflow: hidden;
                     border: 1px solid #e3e3e3;
                 }
+
                 .main {
                     margin-top: 20px;
                     background: #FFFFFF;
                     padding: 20px;
+
                     .record {
                         border-bottom: 1px solid #e3e3e3;
+
                         .icon {
                             color: #999 !important;
                             font-size: 16px;
@@ -503,40 +655,48 @@ export default {
                             padding-bottom: 5px;
                             padding-left: 10px;
                         }
+
                         .text {
                             font-size: 12px;
                             color: #999;
                             padding-left: 10px;
                         }
                     }
+
                     .tag {
                         border-bottom: 1px solid #e3e3e3;
                         height: 40px;
                         color: #999 !important;
                         font-size: 16px;
+
                         .left {
                             float: left;
                             height: 40px;
                             line-height: 40px;
                         }
+
                         .right {
                             float: right;
                             height: 40px;
                             line-height: 40px;
                         }
                     }
+
                     .bg-img {
                         text-align: center;
                         margin-top: 20px;
+
                         img {
                             max-width: 100%;
                         }
                     }
+
                     .descripiton {
                         /*margin-top: 20px;*/
                     }
                 }
             }
+
             .article-item {
                 margin: 30px;
                 min-height: 320px;
@@ -544,12 +704,17 @@ export default {
                 padding: 20px;
                 padding-bottom: 5px;
                 width: auto;
+                -webkit-box-shadow: 0 0 3px #bbb;
+                -moz-box-shadow: 0 0 3px #bbb;
+                box-shadow: 0 0 3px #bbb;
+
                 .title {
                     color: #437bd0;
                     font-size: 23px;
                     line-height: 100%;
                     margin: 0 0 7px;
                 }
+
                 .record {
                     .icon {
                         color: #999 !important;
@@ -558,29 +723,35 @@ export default {
                         padding-bottom: 5px;
                         padding-left: 10px;
                     }
+
                     .text {
                         font-size: 12px;
                         color: #999;
                         padding-left: 10px;
                     }
                 }
+
                 .flex {
                     margin-top: 10px;
+
                     .left {
                         float: left;
                         width: 300px;
                         height: 189px;
                         overflow: hidden;
+
                         img {
                             width: 300px;
                             max-width: 300px;
                         }
                     }
+
                     .right {
                         float: right;
                         margin-top: -13px;
                         max-width: 55%;
                         min-width: 55%;
+
                         .content-text {
                             width: auto;
                             height: 160px;
@@ -593,6 +764,7 @@ export default {
                             -webkit-line-clamp: 7;
                             overflow: hidden;
                         }
+
                         .btn {
                             margin-top: 12px;
                             margin-left: 0px;
@@ -600,6 +772,7 @@ export default {
                             border: none;
                         }
                     }
+
                     .footer {
                         padding: 10px;
                         padding-top: 30px;
@@ -607,16 +780,19 @@ export default {
                         position: relative;
                         color: #999;
                         width: 100%;
+
                         .menu {
                             width: 50%;
                             text-align: left;
                             display: inline-block;
                         }
+
                         .tag {
                             width: 50%;
                             text-align: right;
                             display: inline-block;
                         }
+
                         &:before {
                             content: "";
                             position: absolute;
@@ -629,6 +805,7 @@ export default {
                     }
                 }
             }
+
             .in-search {
                 margin: auto;
                 margin-top: 30px;
@@ -637,6 +814,10 @@ export default {
                 background: #ffffff;
                 min-height: 150px;
                 line-height: 150%;
+                -webkit-box-shadow: 0 0 3px #bbb;
+                -moz-box-shadow: 0 0 3px #bbb;
+                box-shadow: 0 0 3px #bbb;
+
                 .title {
                     text-align: left;
                     font-size: 20px;
@@ -644,74 +825,94 @@ export default {
                     padding: 10px 0 5px 10px;
                     border-bottom: 1px solid #d8d8d8;
                 }
+
                 .inner-search {
                     margin-left: 30px;
                 }
+
                 .main {
                     margin: 0 20px;
-                    font-family: Arial,Helvetica,sans-serif;
+                    font-family: Arial, Helvetica, sans-serif;
                     line-height: 150%;
+
                     .smart-post-list-main {
                         margin-left: 0;
                         margin-bottom: 15px;
                     }
+
                     .sidebar-widget ul {
                         margin: 4px 0 -4px 16px;
                     }
+
                     .smart-post-list-main, .smart-post-list-main li {
                         list-style: none;
                         float: left;
                     }
+
                     .smart-post-list-main {
                         width: 100%;
                     }
+
                     .smart-post-list-main {
                         margin-left: 0;
                     }
+
                     .smart-post-list-main .smart-post-list-single-container {
                         float: left;
                     }
+
                     .sidebar-widget ul li {
                         line-height: 200%;
                     }
+
                     .sidebar-widget p, .sidebar-widget ul li, .sidebar-widget ol li {
                         color: #333;
                         font-size: 13px;
                     }
+
                     .smart-post-list-main li {
                         margin: 0 0 5px;
                     }
+
                     .smart-post-list-main, .smart-post-list-main li {
                         list-style: none;
                         float: left;
                     }
+
                     .smart-post-list-single-container {
                         max-height: 90px;
                         overflow: hidden;
                         padding-bottom: 10px;
                     }
+
                     .smart-post-list-single-container {
                         max-height: 90px;
                         overflow: hidden;
                         padding-bottom: 10px;
                     }
+
                     .smart-post-list-main .image-left-of-excerpt {
                         float: left;
                     }
+
                     .smart-post-list-main .text-left-of-excerpt {
                         display: table-row;
                         *display: inline-block;
                     }
+
                     .sidebar-widget ul li a {
                         text-decoration: none;
                     }
+
                     a {
                         color: #6596dd;
                         text-decoration: none;
                     }
-                    a:hover{
+
+                    a:hover {
                         color: #437bd0;
                     }
+
                     .sidebar-widget p, .sidebar-widget ul li, .sidebar-widget ol li {
                         color: #333;
                         font-size: 13px;
@@ -719,5 +920,161 @@ export default {
                 }
             }
         }
+
+        #wrapper-footer {
+            background: #333;
+            margin: auto;
+            height: auto;
+            position: relative;
+            width: 100%;
+        }
+
+        footer {
+            border: 0;
+            margin: 0;
+            padding: 0;
+            vertical-align: baseline;
+        }
+
+        #footer {
+            margin: 0 auto;
+            padding: 0;
+            position: relative;
+            width: 100%;
+        }
+
+        .footer-widget-area {
+            height: auto;
+            margin-right: 30px;
+            padding: 30px 0 4px;
+            position: relative;
+            width: 370px;
+            z-index: 50;
+        }
+
+        .footer-widget {
+            margin-bottom: 20px;
+        }
+
+        #footer .footer-widget .footer-headline {
+            border-bottom: 1px solid #222;
+            color: white;
+            font-family: Oswald, Arial, Helvetica, sans-serif;
+            font-size: 19px;
+            line-height: 100%;
+            margin-bottom: 3px;
+            padding-bottom: 9px;
+        }
+
+        #footer a {
+            color: #c1d7f8;
+        }
+
+        a {
+            color: #437bd0;
+            text-decoration: underline;
+        }
+
+        .relation {
+            margin-top: 20px;
+            width: 36px;
+            text-align: center;
+            padding-top: 10px;
+            border-top: 1px solid #d8d8d8;
+            font-size: 14px;
+        }
+
+        .next-previous {
+            margin-top: 20px;
+            padding: 5px 10px;
+            border-top: 1px solid #d8d8d8;
+            border-bottom: 1px solid #d8d8d8;
+
+            .next {
+                text-align: right;
+            }
+        }
+        .re-list{
+            #jp-relatedposts {
+                display: none;
+                padding-top: 1em;
+                margin: 1em 0;
+                position: relative;
+                clear: both;
+            }
+            #jp-relatedposts h3.jp-relatedposts-headline {
+                margin: 0 0 1em 0;
+                display: inline-block;
+                font-size: 9pt;
+                font-weight: 700;
+                font-family: inherit;
+            }
+            #jp-relatedposts h3.jp-relatedposts-headline em {
+                font-style: normal;
+                font-weight: 700;
+            }
+            #jp-relatedposts .jp-relatedposts-items-visual {
+                margin-right: -20px;
+            }
+            #jp-relatedposts .jp-relatedposts-items-visual .jp-relatedposts-post {
+                padding-right: 20px;
+                filter: alpha(opacity=80);
+                -moz-opacity: .8;
+                opacity: .8;
+            }
+            #jp-relatedposts .jp-relatedposts-items .jp-relatedposts-post {
+                margin: 0 0 1em;
+                box-sizing: border-box;
+                -moz-box-sizing: border-box;
+                -webkit-box-sizing: border-box;
+            }
+            a {
+                color: #437bd0;
+                text-decoration: underline;
+            }
+            #jp-relatedposts .jp-relatedposts-items-visual .jp-relatedposts-post img.jp-relatedposts-post-img, #jp-relatedposts .jp-relatedposts-items-visual .jp-relatedposts-post span {
+                max-width: 100%;
+            }
+            #jp-relatedposts .jp-relatedposts-items .jp-relatedposts-post img.jp-relatedposts-post-img, #jp-relatedposts .jp-relatedposts-items .jp-relatedposts-post span {
+                display: block;
+                max-width: 90%;
+                overflow: hidden;
+                text-overflow: ellipsis;
+            }
+            a img {
+                border: 0;
+            }
+
+            img {
+                height: auto;
+                max-width: 100%;
+            }
+            #jp-relatedposts .jp-relatedposts-items-visual h4.jp-relatedposts-post-title {
+                text-transform: none;
+                margin: 0;
+                font-family: inherit;
+                display: block;
+                max-width: 100%;
+            }
+            #jp-relatedposts .jp-relatedposts-items p, #jp-relatedposts .jp-relatedposts-items-visual h4.jp-relatedposts-post-title {
+                font-size: 14px;
+                line-height: 20px;
+                margin: 0;
+            }
+            #jp-relatedposts .jp-relatedposts-items .jp-relatedposts-post .jp-relatedposts-post-title a {
+                font-size: inherit;
+                font-weight: 400;
+                text-decoration: none;
+                filter: alpha(opacity=100);
+                -moz-opacity: 1;
+                opacity: 1;
+            }
+            #jp-relatedposts .jp-relatedposts-items p, #jp-relatedposts .jp-relatedposts-items-visual h4.jp-relatedposts-post-title {
+                font-size: 14px;
+                line-height: 20px;
+                margin: 0;
+            }
+        }
+
     }
 </style>

@@ -60,7 +60,8 @@ export default {
     let attr = {
       'obj': 'article',
       'act': 'get',
-      'articleId': id
+      'articleId': id,
+      'pagersize': 2
     }
     request.requestData(ws, attr, cb)
   },
