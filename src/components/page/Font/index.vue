@@ -91,8 +91,8 @@
                                 <div class="left"><i class="el-icon-menu"></i>{{articleInfo.categoryName}}</div>
                                 <div class="right">{{articleInfo.tag}}</div>
                             </div>
-                            <div class="bg-img">
-                                <img :src="'http://148.72.64.80/cgi-bin/download.pl?proj=credit&fid=' + articleInfo.coverFid"
+                            <div class="bg-img" style="width: 100%">
+                                <img style="max-width: 95%" :src="'http://148.72.64.80/cgi-bin/download.pl?proj=credit&fid=' + articleInfo.coverFid"
                                      alt="">
                             </div>
                             <div class="descripiton" v-html="articleInfo.content">
@@ -458,12 +458,14 @@ export default {
                         }
                     }
                     .bg-img {
+                        text-align: center;
+                        margin-top: 20px;
                         img {
-                            width: 100%;
+                            max-width: 100%;
                         }
                     }
                     .descripiton {
-                        margin-top: 20px;
+                        /*margin-top: 20px;*/
                     }
                 }
             }
