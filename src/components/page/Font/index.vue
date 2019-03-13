@@ -14,7 +14,7 @@
                                 popper-class="my-autocomplete"
                                 v-model="pageInit.keyword"
                                 placeholder="请输入内容"
-                               >
+                        >
                             <i
                                     class="el-icon-search el-input__icon"
                                     slot="suffix"
@@ -92,19 +92,22 @@
                                 <div class="right">{{articleInfo.tag}}</div>
                             </div>
                             <div class="bg-img" style="width: 100%">
-                                <img style="max-width: 95%" :src="'http://148.72.64.80/cgi-bin/download.pl?proj=credit&fid=' + articleInfo.coverFid"
+                                <img style="max-width: 95%"
+                                     :src="'http://148.72.64.80/cgi-bin/download.pl?proj=credit&fid=' + articleInfo.coverFid"
                                      alt="">
                             </div>
                             <div class="descripiton" v-html="articleInfo.content">
                             </div>
                         </div>
                     </div>
-                    <div v-if="articleInfo === null" style="text-align: center;padding: 20px;margin-top:30px;background: #ffffff">
+                    <div v-if="articleInfo === null"
+                         style="text-align: center;padding: 20px;margin-top:30px;background: #ffffff">
                         暂无搜索结果
                     </div>
                 </el-col>
                 <el-col v-else :lg="16" :md="24" style="min-height: 800px;">
-                    <div v-if="article_list.length > 0" class="article-item" v-for="(item,index) in article_list" :key="index">
+                    <div v-if="article_list.length > 0" class="article-item" v-for="(item,index) in article_list"
+                         :key="index">
                         <div class="title" @click="readMore(item._id)" style="cursor: pointer;">{{item.title}}</div>
                         <div class="record">
                             <i class="icon el-icon-date"></i><span class="text">{{item.author}}</span>
@@ -114,7 +117,8 @@
                         </div>
                         <div class="flex">
                             <div class="left" @click="readMore(item._id)" style="cursor: pointer;">
-                                <img :src="'http://148.72.64.80/cgi-bin/download.pl?proj=credit&fid=' + item.coverFid" alt="">
+                                <img :src="'http://148.72.64.80/cgi-bin/download.pl?proj=credit&fid=' + item.coverFid"
+                                     alt="">
                             </div>
                             <div class="right">
                                 <div class="content-text" style="cursor: pointer;" @click="readMore(item._id)">
@@ -125,17 +129,20 @@
                                 </el-button>
                             </div>
                             <div class="footer">
-                                <div class="menu" style="cursor: pointer;" @click="getCatList(item.categoryId)">{{ item.categoryName }}</div>
+                                <div class="menu" style="cursor: pointer;" @click="getCatList(item.categoryId)">{{
+                                    item.categoryName }}
+                                </div>
                                 <div class="tag" style="cursor: pointer;">{{item.tag ? item.tag : item.ut}}</div>
                             </div>
                         </div>
                     </div>
-                    <div v-if="article_list.length === 0" style="text-align: center;padding: 20px;margin-top:30px;background: #ffffff">
+                    <div v-if="article_list.length === 0"
+                         style="text-align: center;padding: 20px;margin-top:30px;background: #ffffff">
                         暂无搜索结果
                     </div>
                 </el-col>
                 <el-col :lg="8" :md="24">
-                    <div class="in-search">
+                    <div class="in-search" style="padding-top: 1px">
                         <div class="title">
                             站内搜索
                         </div>
@@ -145,7 +152,7 @@
                                 v-model="state3"
                                 placeholder="请输入内容"
                                 style="width: 300px"
-                               >
+                        >
                             <i
                                     class="el-icon-search el-input__icon"
                                     slot="suffix"
@@ -153,6 +160,65 @@
                                     @click="searchIn">
                             </i>
                         </el-input>
+                    </div>
+                    <div class="in-search" style="float:left;margin-left: 10px">
+                        <div class="title">
+                            最新热门
+                        </div>
+                        <div class="main">
+                            <ul class="smart-post-list-main">
+                                <li class="smart-post-list-single-container" style="width: 100%; clear: right;">
+                                    <div class="image-left-of-excerpt img-container" style="width: 155px;"><a
+                                            href="https://www.uscreditcardguide.com/citi-aadvantage-platinum-select/"><img
+                                            src="https://i2.wp.com/www.uscreditcardguide.com/wp-content/uploads/card.jpg?resize=150%2C95&amp;ssl=1"
+                                            class="smart-post-list-image"></a></div>
+                                    <div class="text-left-of-excerpt"><a
+                                            href="https://www.uscreditcardguide.com/citi-aadvantage-platinum-select/"
+                                            class="smart-post-list-title">Citi AAdvantage Platinum 信用卡【2019.2
+                                        更新：5.1起10%返还将被取消】</a></div>
+                                </li>
+                                <li class="smart-post-list-single-container" style="width: 100%; clear: right;">
+                                    <div class="image-left-of-excerpt img-container" style="width: 155px;"><a
+                                            href="https://www.uscreditcardguide.com/chase-ihg-premier/"><img
+                                            src="https://i2.wp.com/www.uscreditcardguide.com/wp-content/uploads/chase-ihg-premier-e1532539571959.jpg?resize=150%2C95&amp;ssl=1"
+                                            class="smart-post-list-image"></a></div>
+                                    <div class="text-left-of-excerpt"><a
+                                            href="https://www.uscreditcardguide.com/chase-ihg-premier/"
+                                            class="smart-post-list-title">Chase IHG Premier 信用卡【2019.2 更新：80k+40k+$50
+                                        史高开卡奖励！】</a></div>
+                                </li>
+                                <li class="smart-post-list-single-container" style="width: 100%; clear: right;">
+                                    <div class="image-left-of-excerpt img-container" style="width: 155px;"><a
+                                            href="https://www.uscreditcardguide.com/amex-platinum-delta-skymiles/"><img
+                                            src="https://i2.wp.com/www.uscreditcardguide.com/wp-content/uploads/platinum-delta-skymiles.png?resize=150%2C95&amp;ssl=1"
+                                            class="smart-post-list-image"></a></div>
+                                    <div class="text-left-of-excerpt"><a
+                                            href="https://www.uscreditcardguide.com/amex-platinum-delta-skymiles/"
+                                            class="smart-post-list-title">AmEx Platinum Delta SkyMiles 信用卡【2019.2
+                                        更新：75k+$100 历史最高开卡奖励！】</a></div>
+                                </li>
+                                <li class="smart-post-list-single-container" style="width: 100%; clear: right;">
+                                    <div class="image-left-of-excerpt img-container" style="width: 155px;"><a
+                                            href="https://www.uscreditcardguide.com/amex-gold-delta-skymiles/"><img
+                                            src="https://i2.wp.com/www.uscreditcardguide.com/wp-content/uploads/delta-skymiles.png?resize=150%2C95&amp;ssl=1"
+                                            class="smart-post-list-image"></a></div>
+                                    <div class="text-left-of-excerpt"><a
+                                            href="https://www.uscreditcardguide.com/amex-gold-delta-skymiles/"
+                                            class="smart-post-list-title">AmEx Gold Delta SkyMiles 信用卡【2019.2 更新：60k+$50
+                                        public offer】</a></div>
+                                </li>
+                                <li class="smart-post-list-single-container" style="width: 100%; clear: right;">
+                                    <div class="image-left-of-excerpt img-container" style="width: 155px;"><a
+                                            href="https://www.uscreditcardguide.com/amex-hilton-aspire/"><img
+                                            src="https://i2.wp.com/www.uscreditcardguide.com/wp-content/uploads/hilton-honors-aspire-credit-card.png?resize=150%2C95&amp;ssl=1"
+                                            class="smart-post-list-image"></a></div>
+                                    <div class="text-left-of-excerpt"><a
+                                            href="https://www.uscreditcardguide.com/amex-hilton-aspire/"
+                                            class="smart-post-list-title">AmEx Hilton Aspire 信用卡【2018.10 更新：150k
+                                        开卡奖励】</a></div>
+                                </li>
+                            </ul>
+                        </div>
                     </div>
                 </el-col>
             </el-row>
@@ -175,6 +241,7 @@
 import api from './server'
 import 'element-ui/lib/theme-chalk/display.css'
 import utils from '@/utils/utils'
+
 const SEARCH_LIST = 1
 const ARTICLE_LIST = 2
 const MEMU_ARTICLE_LIST = 3
@@ -374,6 +441,7 @@ export default {
     .font-container {
         background: #F1F1F1;
         border-radius: 5px;
+        overflow: hidden;
         .header-container {
             background: #FFFFFF;
             width: 100%;
@@ -502,7 +570,7 @@ export default {
                         float: left;
                         width: 300px;
                         height: 189px;
-                        overflow:hidden;
+                        overflow: hidden;
                         img {
                             width: 300px;
                             max-width: 300px;
@@ -539,12 +607,12 @@ export default {
                         position: relative;
                         color: #999;
                         width: 100%;
-                        .menu{
+                        .menu {
                             width: 50%;
                             text-align: left;
                             display: inline-block;
                         }
-                        .tag{
+                        .tag {
                             width: 50%;
                             text-align: right;
                             display: inline-block;
@@ -564,9 +632,11 @@ export default {
             .in-search {
                 margin: auto;
                 margin-top: 30px;
+                font-size: 13px;
                 width: 95%;
                 background: #ffffff;
-                height: 150px;
+                min-height: 150px;
+                line-height: 150%;
                 .title {
                     text-align: left;
                     font-size: 20px;
@@ -576,6 +646,76 @@ export default {
                 }
                 .inner-search {
                     margin-left: 30px;
+                }
+                .main {
+                    margin: 0 20px;
+                    font-family: Arial,Helvetica,sans-serif;
+                    line-height: 150%;
+                    .smart-post-list-main {
+                        margin-left: 0;
+                        margin-bottom: 15px;
+                    }
+                    .sidebar-widget ul {
+                        margin: 4px 0 -4px 16px;
+                    }
+                    .smart-post-list-main, .smart-post-list-main li {
+                        list-style: none;
+                        float: left;
+                    }
+                    .smart-post-list-main {
+                        width: 100%;
+                    }
+                    .smart-post-list-main {
+                        margin-left: 0;
+                    }
+                    .smart-post-list-main .smart-post-list-single-container {
+                        float: left;
+                    }
+                    .sidebar-widget ul li {
+                        line-height: 200%;
+                    }
+                    .sidebar-widget p, .sidebar-widget ul li, .sidebar-widget ol li {
+                        color: #333;
+                        font-size: 13px;
+                    }
+                    .smart-post-list-main li {
+                        margin: 0 0 5px;
+                    }
+                    .smart-post-list-main, .smart-post-list-main li {
+                        list-style: none;
+                        float: left;
+                    }
+                    .smart-post-list-single-container {
+                        max-height: 90px;
+                        overflow: hidden;
+                        padding-bottom: 10px;
+                    }
+                    .smart-post-list-single-container {
+                        max-height: 90px;
+                        overflow: hidden;
+                        padding-bottom: 10px;
+                    }
+                    .smart-post-list-main .image-left-of-excerpt {
+                        float: left;
+                    }
+                    .smart-post-list-main .text-left-of-excerpt {
+                        display: table-row;
+                        *display: inline-block;
+                    }
+                    .sidebar-widget ul li a {
+                        text-decoration: none;
+                    }
+                    a {
+                        color: #6596dd;
+                        text-decoration: none;
+                    }
+                    a:hover{
+                        color: #437bd0;
+                    }
+                    .sidebar-widget p, .sidebar-widget ul li, .sidebar-widget ol li {
+                        color: #333;
+                        font-size: 13px;
+                    }
                 }
             }
         }
