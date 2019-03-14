@@ -33,7 +33,7 @@
                     @select="handleSelect"
                     background-color="#333333"
                     text-color="#fff"
-                    active-text-color="#ffd04b">
+                    active-text-color="#409EFF">
                 <el-menu-item @click="home" index="index">
                     首页
                 </el-menu-item>
@@ -75,7 +75,7 @@
         <div class="article-list" v-loading="loading">
             <el-row>
                 <el-col v-if="displayDesc" :lg="16" :md="24">
-                    <div class="article-content" v-if="articleInfo !== null">
+                    <div class="article-content" v-if="articleInfo.title !== undefined">
                         <div class="title">
                             {{articleInfo.title}}
                         </div>
@@ -101,7 +101,7 @@
                                 <!--相关-->
                             <!--</div>-->
                             <div class="re-list">
-                                <div id="jp-relatedposts" class="jp-relatedposts" style="display: block;">
+                                <div id="jp-relatedposts" class="jp-relatedposts" style="display: block;text-align: left;">
                                     <h3 class="jp-relatedposts-headline">
                                         <em>相关</em>
                                     </h3>
@@ -167,9 +167,77 @@
                             </div>
                         </div>
                     </div>
-                    <div v-if="articleInfo === null"
+                    <div class="main" v-else
                          style="text-align: center;padding: 20px;margin-top:30px;background: #ffffff">
                         暂无搜索结果
+                        <!--<div class="relation">-->
+                        <!--相关-->
+                        <!--</div>-->
+                        <div class="re-list">
+                            <div id="jp-relatedposts" class="jp-relatedposts" style="display: block;text-align: left;border-top: 1px solid #d8d8d8;">
+                                <h3 class="jp-relatedposts-headline">
+                                    <em>相关</em>
+                                </h3>
+                                <el-row type="flex" justify="space-around" class="jp-relatedposts-items jp-relatedposts-items-visual jp-relatedposts-grid ">
+                                    <el-col :span="8" class="jp-relatedposts-post jp-relatedposts-post0 jp-relatedposts-post-thumbs"
+                                            data-post-id="9297" data-post-format="false"><a
+                                            class="jp-relatedposts-post-a"
+                                            href="#"
+                                            title="航空里程兑换基础知识总结使用航空里程兑换奖励机票是一个很难但也很好玩的问题，虽然往往航司之间的规定也有不同，但总体上来说也还…" rel="nofollow" data-origin="76044" data-position="0"><img
+                                            class="jp-relatedposts-post-img"
+                                            src="https://i1.wp.com/www.uscreditcardguide.com/wp-content/uploads/Airbus_A380_overfly.jpg?fit=1200%2C787&amp;ssl=1&amp;resize=350%2C200"
+                                            width="350" alt="航空里程兑换基础知识总结"></a><h4
+                                            class="jp-relatedposts-post-title"><a class="jp-relatedposts-post-a"
+                                                                                  href="#"
+                                                                                  title="航空里程兑换基础知识总结使用航空里程兑换奖励机票是一个很难但也很好玩的问题，虽然往往航司之间的规定也有不同，但总体上来说也还…" rel="nofollow" data-origin="76044"
+                                                                                  data-position="0">航空里程兑换基础知识总结</a>
+                                    </h4>
+                                        <p class="jp-relatedposts-post-excerpt">
+                                            使用航空里程兑换奖励机票是一个很难但也很好玩的问题，虽然往往航司之间的规定也有不同，但总体上来说也还…</p>
+                                        <p class="jp-relatedposts-post-date" style="display: block;">2015-10-10</p>
+                                        <p class="jp-relatedposts-post-context">在“航空综述”中</p></el-col>
+                                    <el-col :span="8" class="jp-relatedposts-post jp-relatedposts-post1 jp-relatedposts-post-thumbs"
+                                            data-post-id="16175" data-post-format="false"><a
+                                            class="jp-relatedposts-post-a"
+                                            href="#"
+                                            title="贬值前的头等翱翔(第一回): CLT 机场 Admirals 休息室, JFK Courtyard 大床房。贬值前的头等翱翔 系列： 概述。 第一回：国内AA头等然并卵，JFK万怡酒店不带餐；ROA登机黑妞助…" rel="nofollow" data-origin="76044" data-position="1"><img
+                                            class="jp-relatedposts-post-img"
+                                            src="https://i1.wp.com/www.uscreditcardguide.com/wp-content/uploads/1-2.jpg?fit=1024%2C543&amp;ssl=1&amp;resize=350%2C200"
+                                            width="350"
+                                            alt="贬值前的头等翱翔(第一回): CLT 机场 Admirals 休息室, JFK Courtyard 大床房。"></a><h4
+                                            class="jp-relatedposts-post-title"><a class="jp-relatedposts-post-a"
+                                                                                  href="#"
+                                                                                  title="贬值前的头等翱翔(第一回): CLT 机场 Admirals 休息室, JFK Courtyard 大床房。贬值前的头等翱翔 系列概述。 第一回：国内AA头等然并卵，JFK万怡酒店不带餐；ROA登机黑妞助…" rel="nofollow" data-origin="76044" data-position="1">贬值前的头等翱翔(第一回):
+                                        CLT 机场 Admirals 休息室, JFK Courtyard 大床房。</a></h4>
+                                        <p class="jp-relatedposts-post-excerpt">贬值前的头等翱翔 系列： 概述。
+                                            第一回：国内AA头等然并卵，JFK万怡酒店不带餐；ROA登机黑妞助…</p>
+                                        <p class="jp-relatedposts-post-date" style="display: block;">2016-04-18</p>
+                                        <p class="jp-relatedposts-post-context">在“飞行体验”中</p></el-col>
+                                    <el-col :span="8" class="jp-relatedposts-post jp-relatedposts-post2 jp-relatedposts-post-thumbs"
+                                            data-post-id="5400" data-post-format="false"><a
+                                            class="jp-relatedposts-post-a"
+                                            href="#"
+                                            title="美国航空 American Airlines (AA) AAdvantage 里程指南AA 作为美国三大航司之一（收购 US Airways 之后其实是最大的了），大家平时坐飞机肯定也接…" rel="nofollow" data-origin="76044" data-position="2"><img
+                                            class="jp-relatedposts-post-img"
+                                            src="https://i1.wp.com/www.uscreditcardguide.com/wp-content/uploads/16374925430_1a76838c60_b.jpg?fit=1024%2C678&amp;ssl=1&amp;resize=350%2C200"
+                                            width="350" alt="美国航空 American Airlines (AA) AAdvantage 里程指南"></a><h4
+                                            class="jp-relatedposts-post-title"><a class="jp-relatedposts-post-a"
+                                                                                  href="#"
+                                                                                  title="美国航空 American Airlines (AA) AAdvantage 里程指南AA 作为美国三大航司之一（收购 US Airways 之后其实是最大的了），大家平时坐飞机肯定也接…" rel="nofollow" data-origin="76044" data-position="2">美国航空 American
+                                        Airlines (AA) AAdvantage 里程指南</a></h4>
+                                        <p class="jp-relatedposts-post-excerpt">AA 作为美国三大航司之一（收购 US Airways
+                                            之后其实是最大的了），大家平时坐飞机肯定也接…</p>
+                                        <p class="jp-relatedposts-post-date" style="display: block;">2016-10-13</p>
+                                        <p class="jp-relatedposts-post-context">在“寰宇一家 OneWorld”中</p></el-col>
+                                </el-row>
+                            </div>
+                        </div>
+                        <div class="next-previous">
+                            <el-row type="flex" class="row-bg" justify="space-between">
+                                <el-col class="pre" :span="3">上一页</el-col>
+                                <el-col class="next" :span="3">下一页</el-col>
+                            </el-row>
+                        </div>
                     </div>
                 </el-col>
                 <el-col v-else :lg="16" :md="24" style="min-height: 800px;">
@@ -287,6 +355,16 @@
                             </ul>
                         </div>
                     </div>
+                    <div class="in-search" style="clear: both;margin-top: 680px;padding-top: 1px;height: 260px">
+                        <div class="title">
+                            我们的App
+                        </div>
+                        <div class="box">
+                            <img style="text-align: center;margin: auto" width="40%"
+                                 src="@/assets/img/qrcode.png"
+                                 alt="">
+                        </div>
+                    </div>
                 </el-col>
             </el-row>
         </div>
@@ -307,7 +385,7 @@
                         <div id="text-14" class="widget footer-widget widget_text"><p class="footer-headline">Contact
                             Us</p>
                             <div class="textwidget">
-                                <div style="color:#999999">realdongming@gmail.com</div>
+                                <div style="color:#999999">uslazycreditcard@gmail.com</div>
                             </div>
                         </div>
                         <div id="text-8" class="widget footer-widget widget_text"><p class="footer-headline">
@@ -476,7 +554,7 @@ export default {
           console.log(d.article)
           this.total = 0
           this.articleInfo = d.article
-          if (this.articleInfo === null) {
+          if (this.articleInfo) {
             this.displayDesc = true
             this.loading = false
             return
@@ -488,7 +566,7 @@ export default {
           this.loading = false
         })
       }
-      if (item.menuType == 3) {
+      if (item.menuType === 3) {
         this.loading = true
         this.pageInit.page = 1
         this.pageInit.menuId = item._id
@@ -582,7 +660,10 @@ export default {
         background: #F1F1F1;
         border-radius: 5px;
         overflow: hidden;
-
+        .box{
+            width: 100%;
+            text-align: center;
+        }
         .header-container {
             background: #FFFFFF;
             width: 100%;
@@ -668,7 +749,6 @@ export default {
                         height: 40px;
                         color: #999 !important;
                         font-size: 16px;
-
                         .left {
                             float: left;
                             height: 40px;
@@ -774,7 +854,6 @@ export default {
                     }
 
                     .footer {
-                        padding: 10px;
                         padding-top: 30px;
                         clear: both;
                         position: relative;
@@ -785,12 +864,16 @@ export default {
                             width: 50%;
                             text-align: left;
                             display: inline-block;
+                            overflow: hidden;/*超出部分隐藏*/
                         }
 
                         .tag {
                             width: 50%;
                             text-align: right;
                             display: inline-block;
+                            overflow: hidden;/*超出部分隐藏*/
+                            white-space: nowrap;/*不换行*/
+                            text-overflow:ellipsis;/*超出部分文字以...显示*/
                         }
 
                         &:before {
@@ -800,7 +883,7 @@ export default {
                             height: 1px;
                             width: 100%;
                             top: 20px;
-                            right: 5px;
+                            right: 0px;
                         }
                     }
                 }

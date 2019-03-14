@@ -42,7 +42,8 @@ export default {
     let attr = {
       'obj': 'articleByMenuId',
       'act': 'info',
-      'menuId': id
+      'menuId': id,
+      'pagersize': 2
     }
     request.requestData(ws, attr, cb)
   },
