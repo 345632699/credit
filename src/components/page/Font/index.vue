@@ -106,63 +106,43 @@
                                         <em>相关</em>
                                     </h3>
                                     <el-row type="flex" justify="space-around" class="jp-relatedposts-items jp-relatedposts-items-visual jp-relatedposts-grid ">
-                                        <el-col :span="8" class="jp-relatedposts-post jp-relatedposts-post0 jp-relatedposts-post-thumbs"
-                                             data-post-id="9297" data-post-format="false"><a
-                                                class="jp-relatedposts-post-a"
-                                                href="#"
-                                                title="航空里程兑换基础知识总结使用航空里程兑换奖励机票是一个很难但也很好玩的问题，虽然往往航司之间的规定也有不同，但总体上来说也还…" rel="nofollow" data-origin="76044" data-position="0"><img
-                                                class="jp-relatedposts-post-img"
-                                                src="https://i1.wp.com/www.uscreditcardguide.com/wp-content/uploads/Airbus_A380_overfly.jpg?fit=1200%2C787&amp;ssl=1&amp;resize=350%2C200"
-                                                width="350" alt="航空里程兑换基础知识总结"></a><h4
-                                                class="jp-relatedposts-post-title"><a class="jp-relatedposts-post-a"
-                                                                                      href="#"
-                                                                                      title="航空里程兑换基础知识总结使用航空里程兑换奖励机票是一个很难但也很好玩的问题，虽然往往航司之间的规定也有不同，但总体上来说也还…" rel="nofollow" data-origin="76044"
-                                                                                      data-position="0">航空里程兑换基础知识总结</a>
-                                        </h4>
+                                        <el-col v-for="(item,index) in relatedList" :key="index"
+                                                :span="8"
+                                                class="jp-relatedposts-post jp-relatedposts-post0 jp-relatedposts-post-thumbs"
+                                                data-post-id="9297" data-post-format="false">
+                                            <a
+                                                    class="jp-relatedposts-post-a"
+                                                    href="#"
+                                                    @click="readMore(item._id)"
+                                                    :title="item.content" rel="nofollow" data-origin="76044"
+                                                    data-position="0">
+                                                <img
+                                                        class="jp-relatedposts-post-img"
+                                                        :src="'http://148.72.64.80/cgi-bin/download.pl?proj=credit&fid=' + item.coverFid"
+                                                        width="350" height="144" :alt="item.tag">
+                                            </a>
+                                            <h4
+                                                    class="jp-relatedposts-post-title">
+                                                <a class="jp-relatedposts-post-a"
+                                                   href="#"
+                                                   @click="readMore(item._id)"
+                                                   :title="item.title" rel="nofollow" data-origin="76044"
+                                                   data-position="0">{{item.title}}
+                                                </a>
+                                            </h4>
                                             <p class="jp-relatedposts-post-excerpt">
-                                                使用航空里程兑换奖励机票是一个很难但也很好玩的问题，虽然往往航司之间的规定也有不同，但总体上来说也还…</p>
-                                            <p class="jp-relatedposts-post-date" style="display: block;">2015-10-10</p>
-                                            <p class="jp-relatedposts-post-context">在“航空综述”中</p></el-col>
-                                        <el-col :span="8" class="jp-relatedposts-post jp-relatedposts-post1 jp-relatedposts-post-thumbs"
-                                             data-post-id="16175" data-post-format="false"><a
-                                                class="jp-relatedposts-post-a"
-                                                href="#"
-                                                title="贬值前的头等翱翔(第一回): CLT 机场 Admirals 休息室, JFK Courtyard 大床房。贬值前的头等翱翔 系列： 概述。 第一回：国内AA头等然并卵，JFK万怡酒店不带餐；ROA登机黑妞助…" rel="nofollow" data-origin="76044" data-position="1"><img
-                                                class="jp-relatedposts-post-img"
-                                                src="https://i1.wp.com/www.uscreditcardguide.com/wp-content/uploads/1-2.jpg?fit=1024%2C543&amp;ssl=1&amp;resize=350%2C200"
-                                                width="350"
-                                                alt="贬值前的头等翱翔(第一回): CLT 机场 Admirals 休息室, JFK Courtyard 大床房。"></a><h4
-                                                class="jp-relatedposts-post-title"><a class="jp-relatedposts-post-a"
-                                                                                      href="#"
-                                                                                      title="贬值前的头等翱翔(第一回): CLT 机场 Admirals 休息室, JFK Courtyard 大床房。贬值前的头等翱翔 系列概述。 第一回：国内AA头等然并卵，JFK万怡酒店不带餐；ROA登机黑妞助…" rel="nofollow" data-origin="76044" data-position="1">贬值前的头等翱翔(第一回):
-                                            CLT 机场 Admirals 休息室, JFK Courtyard 大床房。</a></h4>
-                                            <p class="jp-relatedposts-post-excerpt">贬值前的头等翱翔 系列： 概述。
-                                                第一回：国内AA头等然并卵，JFK万怡酒店不带餐；ROA登机黑妞助…</p>
-                                            <p class="jp-relatedposts-post-date" style="display: block;">2016-04-18</p>
-                                            <p class="jp-relatedposts-post-context">在“飞行体验”中</p></el-col>
-                                        <el-col :span="8" class="jp-relatedposts-post jp-relatedposts-post2 jp-relatedposts-post-thumbs"
-                                             data-post-id="5400" data-post-format="false"><a
-                                                class="jp-relatedposts-post-a"
-                                                href="#"
-                                                title="美国航空 American Airlines (AA) AAdvantage 里程指南AA 作为美国三大航司之一（收购 US Airways 之后其实是最大的了），大家平时坐飞机肯定也接…" rel="nofollow" data-origin="76044" data-position="2"><img
-                                                class="jp-relatedposts-post-img"
-                                                src="https://i1.wp.com/www.uscreditcardguide.com/wp-content/uploads/16374925430_1a76838c60_b.jpg?fit=1024%2C678&amp;ssl=1&amp;resize=350%2C200"
-                                                width="350" alt="美国航空 American Airlines (AA) AAdvantage 里程指南"></a><h4
-                                                class="jp-relatedposts-post-title"><a class="jp-relatedposts-post-a"
-                                                                                      href="#"
-                                                                                      title="美国航空 American Airlines (AA) AAdvantage 里程指南AA 作为美国三大航司之一（收购 US Airways 之后其实是最大的了），大家平时坐飞机肯定也接…" rel="nofollow" data-origin="76044" data-position="2">美国航空 American
-                                            Airlines (AA) AAdvantage 里程指南</a></h4>
-                                            <p class="jp-relatedposts-post-excerpt">AA 作为美国三大航司之一（收购 US Airways
-                                                之后其实是最大的了），大家平时坐飞机肯定也接…</p>
-                                            <p class="jp-relatedposts-post-date" style="display: block;">2016-10-13</p>
-                                            <p class="jp-relatedposts-post-context">在“寰宇一家 OneWorld”中</p></el-col>
+                                                {{item.content}}
+                                            </p>
+                                            <p class="jp-relatedposts-post-date" style="display: block;">{{item.ut}}</p>
+                                            <p class="jp-relatedposts-post-context">{{item.categoryName}}</p>
+                                        </el-col>
                                     </el-row>
                                 </div>
                             </div>
                             <div class="next-previous">
                                 <el-row type="flex" class="row-bg" justify="space-between">
-                                    <el-col class="pre" :span="3">上一页</el-col>
-                                    <el-col class="next" :span="3">下一页</el-col>
+                                    <el-col class="pre" :span="3" @click.native="previousPage">上一页</el-col>
+                                    <el-col class="next" :span="3" @click.native="nextPage">下一页</el-col>
                                 </el-row>
                             </div>
                         </div>
@@ -179,63 +159,43 @@
                                     <em>相关</em>
                                 </h3>
                                 <el-row type="flex" justify="space-around" class="jp-relatedposts-items jp-relatedposts-items-visual jp-relatedposts-grid ">
-                                    <el-col :span="8" class="jp-relatedposts-post jp-relatedposts-post0 jp-relatedposts-post-thumbs"
-                                            data-post-id="9297" data-post-format="false"><a
-                                            class="jp-relatedposts-post-a"
-                                            href="#"
-                                            title="航空里程兑换基础知识总结使用航空里程兑换奖励机票是一个很难但也很好玩的问题，虽然往往航司之间的规定也有不同，但总体上来说也还…" rel="nofollow" data-origin="76044" data-position="0"><img
-                                            class="jp-relatedposts-post-img"
-                                            src="https://i1.wp.com/www.uscreditcardguide.com/wp-content/uploads/Airbus_A380_overfly.jpg?fit=1200%2C787&amp;ssl=1&amp;resize=350%2C200"
-                                            width="350" alt="航空里程兑换基础知识总结"></a><h4
-                                            class="jp-relatedposts-post-title"><a class="jp-relatedposts-post-a"
-                                                                                  href="#"
-                                                                                  title="航空里程兑换基础知识总结使用航空里程兑换奖励机票是一个很难但也很好玩的问题，虽然往往航司之间的规定也有不同，但总体上来说也还…" rel="nofollow" data-origin="76044"
-                                                                                  data-position="0">航空里程兑换基础知识总结</a>
-                                    </h4>
+                                    <el-col v-for="(item,index) in relatedList" :key="index"
+                                            :span="8"
+                                            class="jp-relatedposts-post jp-relatedposts-post0 jp-relatedposts-post-thumbs"
+                                            data-post-id="9297" data-post-format="false">
+                                        <a
+                                                class="jp-relatedposts-post-a"
+                                                href="#"
+                                                @click="readMore(item._id)"
+                                                :title="item.content" rel="nofollow" data-origin="76044"
+                                                data-position="0">
+                                            <img
+                                                    class="jp-relatedposts-post-img"
+                                                    :src="'http://148.72.64.80/cgi-bin/download.pl?proj=credit&fid=' + item.coverFid"
+                                                    width="350" height="144" :alt="item.tag">
+                                        </a>
+                                        <h4
+                                                class="jp-relatedposts-post-title">
+                                            <a class="jp-relatedposts-post-a"
+                                               href="#"
+                                               @click="readMore(item._id)"
+                                               :title="item.title" rel="nofollow" data-origin="76044"
+                                               data-position="0">{{item.title}}
+                                            </a>
+                                        </h4>
                                         <p class="jp-relatedposts-post-excerpt">
-                                            使用航空里程兑换奖励机票是一个很难但也很好玩的问题，虽然往往航司之间的规定也有不同，但总体上来说也还…</p>
-                                        <p class="jp-relatedposts-post-date" style="display: block;">2015-10-10</p>
-                                        <p class="jp-relatedposts-post-context">在“航空综述”中</p></el-col>
-                                    <el-col :span="8" class="jp-relatedposts-post jp-relatedposts-post1 jp-relatedposts-post-thumbs"
-                                            data-post-id="16175" data-post-format="false"><a
-                                            class="jp-relatedposts-post-a"
-                                            href="#"
-                                            title="贬值前的头等翱翔(第一回): CLT 机场 Admirals 休息室, JFK Courtyard 大床房。贬值前的头等翱翔 系列： 概述。 第一回：国内AA头等然并卵，JFK万怡酒店不带餐；ROA登机黑妞助…" rel="nofollow" data-origin="76044" data-position="1"><img
-                                            class="jp-relatedposts-post-img"
-                                            src="https://i1.wp.com/www.uscreditcardguide.com/wp-content/uploads/1-2.jpg?fit=1024%2C543&amp;ssl=1&amp;resize=350%2C200"
-                                            width="350"
-                                            alt="贬值前的头等翱翔(第一回): CLT 机场 Admirals 休息室, JFK Courtyard 大床房。"></a><h4
-                                            class="jp-relatedposts-post-title"><a class="jp-relatedposts-post-a"
-                                                                                  href="#"
-                                                                                  title="贬值前的头等翱翔(第一回): CLT 机场 Admirals 休息室, JFK Courtyard 大床房。贬值前的头等翱翔 系列概述。 第一回：国内AA头等然并卵，JFK万怡酒店不带餐；ROA登机黑妞助…" rel="nofollow" data-origin="76044" data-position="1">贬值前的头等翱翔(第一回):
-                                        CLT 机场 Admirals 休息室, JFK Courtyard 大床房。</a></h4>
-                                        <p class="jp-relatedposts-post-excerpt">贬值前的头等翱翔 系列： 概述。
-                                            第一回：国内AA头等然并卵，JFK万怡酒店不带餐；ROA登机黑妞助…</p>
-                                        <p class="jp-relatedposts-post-date" style="display: block;">2016-04-18</p>
-                                        <p class="jp-relatedposts-post-context">在“飞行体验”中</p></el-col>
-                                    <el-col :span="8" class="jp-relatedposts-post jp-relatedposts-post2 jp-relatedposts-post-thumbs"
-                                            data-post-id="5400" data-post-format="false"><a
-                                            class="jp-relatedposts-post-a"
-                                            href="#"
-                                            title="美国航空 American Airlines (AA) AAdvantage 里程指南AA 作为美国三大航司之一（收购 US Airways 之后其实是最大的了），大家平时坐飞机肯定也接…" rel="nofollow" data-origin="76044" data-position="2"><img
-                                            class="jp-relatedposts-post-img"
-                                            src="https://i1.wp.com/www.uscreditcardguide.com/wp-content/uploads/16374925430_1a76838c60_b.jpg?fit=1024%2C678&amp;ssl=1&amp;resize=350%2C200"
-                                            width="350" alt="美国航空 American Airlines (AA) AAdvantage 里程指南"></a><h4
-                                            class="jp-relatedposts-post-title"><a class="jp-relatedposts-post-a"
-                                                                                  href="#"
-                                                                                  title="美国航空 American Airlines (AA) AAdvantage 里程指南AA 作为美国三大航司之一（收购 US Airways 之后其实是最大的了），大家平时坐飞机肯定也接…" rel="nofollow" data-origin="76044" data-position="2">美国航空 American
-                                        Airlines (AA) AAdvantage 里程指南</a></h4>
-                                        <p class="jp-relatedposts-post-excerpt">AA 作为美国三大航司之一（收购 US Airways
-                                            之后其实是最大的了），大家平时坐飞机肯定也接…</p>
-                                        <p class="jp-relatedposts-post-date" style="display: block;">2016-10-13</p>
-                                        <p class="jp-relatedposts-post-context">在“寰宇一家 OneWorld”中</p></el-col>
+                                            {{item.content}}
+                                        </p>
+                                        <p class="jp-relatedposts-post-date" style="display: block;">{{item.ut}}</p>
+                                        <p class="jp-relatedposts-post-context">{{item.categoryName}}</p>
+                                    </el-col>
                                 </el-row>
                             </div>
                         </div>
                         <div class="next-previous">
                             <el-row type="flex" class="row-bg" justify="space-between">
-                                <el-col class="pre" :span="3">上一页</el-col>
-                                <el-col class="next" :span="3">下一页</el-col>
+                                <el-col class="pre" :span="3" @click.native="previousPage">上一页</el-col>
+                                <el-col class="next" :span="3" @click.native="nextPage">下一页</el-col>
                             </el-row>
                         </div>
                     </div>
@@ -302,60 +262,28 @@
                         </div>
                         <div class="main">
                             <ul class="smart-post-list-main">
-                                <li class="smart-post-list-single-container" style="width: 100%; clear: right;">
-                                    <div class="image-left-of-excerpt img-container" style="width: 155px;"><a
-                                            href="#"><img
-                                            src="https://i2.wp.com/www.uscreditcardguide.com/wp-content/uploads/card.jpg?resize=150%2C95&amp;ssl=1"
-                                            class="smart-post-list-image"></a></div>
-                                    <div class="text-left-of-excerpt"><a
-                                            href="#"
-                                            class="smart-post-list-title">Citi AAdvantage Platinum 信用卡【2019.2
-                                        更新：5.1起10%返还将被取消】</a></div>
-                                </li>
-                                <li class="smart-post-list-single-container" style="width: 100%; clear: right;">
-                                    <div class="image-left-of-excerpt img-container" style="width: 155px;"><a
-                                            href="#"><img
-                                            src="https://i2.wp.com/www.uscreditcardguide.com/wp-content/uploads/chase-ihg-premier-e1532539571959.jpg?resize=150%2C95&amp;ssl=1"
-                                            class="smart-post-list-image"></a></div>
-                                    <div class="text-left-of-excerpt"><a
-                                            href="#"
-                                            class="smart-post-list-title">Chase IHG Premier 信用卡【2019.2 更新：80k+40k+$50
-                                        史高开卡奖励！】</a></div>
-                                </li>
-                                <li class="smart-post-list-single-container" style="width: 100%; clear: right;">
-                                    <div class="image-left-of-excerpt img-container" style="width: 155px;"><a
-                                            href="#"><img
-                                            src="https://i2.wp.com/www.uscreditcardguide.com/wp-content/uploads/platinum-delta-skymiles.png?resize=150%2C95&amp;ssl=1"
-                                            class="smart-post-list-image"></a></div>
-                                    <div class="text-left-of-excerpt"><a
-                                            href="#"
-                                            class="smart-post-list-title">AmEx Platinum Delta SkyMiles 信用卡【2019.2
-                                        更新：75k+$100 历史最高开卡奖励！】</a></div>
-                                </li>
-                                <li class="smart-post-list-single-container" style="width: 100%; clear: right;">
-                                    <div class="image-left-of-excerpt img-container" style="width: 155px;"><a
-                                            href="#"><img
-                                            src="https://i2.wp.com/www.uscreditcardguide.com/wp-content/uploads/delta-skymiles.png?resize=150%2C95&amp;ssl=1"
-                                            class="smart-post-list-image"></a></div>
-                                    <div class="text-left-of-excerpt"><a
-                                            href="#"
-                                            class="smart-post-list-title">AmEx Gold Delta SkyMiles 信用卡【2019.2 更新：60k+$50
-                                        public offer】</a></div>
-                                </li>
-                                <li class="smart-post-list-single-container" style="width: 100%; clear: right;">
-                                    <div class="image-left-of-excerpt img-container" style="width: 155px;"><a
-                                            href="#"><img
-                                            src="https://i2.wp.com/www.uscreditcardguide.com/wp-content/uploads/hilton-honors-aspire-credit-card.png?resize=150%2C95&amp;ssl=1"
-                                            class="smart-post-list-image"></a></div>
-                                    <div class="text-left-of-excerpt"><a
-                                            href="#"
-                                            class="smart-post-list-title">AmEx Hilton Aspire 信用卡【2018.10 更新：150k
-                                        开卡奖励】</a></div>
+                                <li class="smart-post-list-single-container" style="width: 100%; clear: right;"
+                                    v-for="(item,index) in hotList" :key="index">
+                                    <div class="image-left-of-excerpt img-container" style="width: 155px;margin-right: 20px">
+                                        <a
+                                                href="#"><img
+                                                width="158" height="95"
+                                                style="border: 1px solid #d8d8d8;"
+                                                :src="'http://148.72.64.80/cgi-bin/download.pl?proj=credit&fid=' + item.coverFid"
+                                                class="smart-post-list-image"></a>
+                                    </div>
+                                    <div class="text-left-of-excerpt">
+                                        <a
+                                                href="#"
+                                                @click="readMore(item._id)"
+                                                class="smart-post-list-title">{{item.title}}<br />{{item.content}}
+                                        </a>
+                                    </div>
                                 </li>
                             </ul>
                         </div>
                     </div>
-                    <div class="in-search" style="clear: both;margin-top: 680px;padding-top: 1px;height: 260px">
+                    <div class="in-search" style="clear: both;margin-top: 470px;padding-top: 1px;height: 260px">
                         <div class="title">
                             我们的App
                         </div>
@@ -442,9 +370,11 @@
                             <div class="textwidget">
                                 <div style="color:#999999"><a
                                         href="#"
-                                        target="_blank">Terms of Service</a> | <a
+                                        @click="readMore('o15523198851367819309')"
+                                        >Terms of Service</a> | <a
                                         href="#"
-                                        target="_blank">Privacy Policy</a></div>
+                                        @click="readMore('o15523194763724160194')"
+                                        >Privacy Policy</a></div>
                             </div>
                         </div>
                     </el-col>
@@ -467,6 +397,7 @@ export default {
   data () {
     return {
       activeIndex: '1',
+      currentArticleId: '',
       activeIndex2: '',
       state3: '',
       list: [],
@@ -482,7 +413,9 @@ export default {
       total: 1,
       article_list: [],
       articleInfo: {},
-      currentList: ''
+      currentList: '',
+      relatedList: [],
+      hotList: []
     }
   },
   methods: {
@@ -536,6 +469,7 @@ export default {
     },
     readMore (id) {
       this.loading = true
+      this.currentArticleId = id
       api.article(id, (d) => {
         this.articleInfo = d.article
         this.articleInfo.content = utils.imgTagAddStyle(this.articleInfo.content)
@@ -543,12 +477,18 @@ export default {
         this.articleInfo.ct = this.timestampToTime(this.articleInfo.ct).slice(0, 10)
         this.displayDesc = true
         this.loading = false
+        d.relatedList.forEach(item => {
+          item.ut = this.timestampToTime(item.ut).slice(0, 10)
+          item.content = item.content.replace(/<[^>]+>/g, '')
+        })
+        this.relatedList = d.relatedList
       })
     },
     op (item) {
       console.log(item)
       if (item.menuType === 2) {
         this.loading = true
+        this.currentArticleId = item._id
         api.articleInfoByMenuId(item._id, (d) => {
           console.log(d)
           console.log(d.article)
@@ -614,6 +554,7 @@ export default {
       } else {
         this.getMenuArticleList(this.pageInit)
       }
+      window.scrollTo(0, 0)
     },
     timestampToTime (timestamp) {
       var date = new Date(timestamp * 1000) // 时间戳为10位需*1000，时间戳为13位的话不需乘1000
@@ -642,12 +583,42 @@ export default {
         this.loading = false
         this.currentList = ARTICLE_LIST
       })
+    },
+    previousPage () {
+      api.previous(this.currentArticleId, (d) => {
+        this.articleInfo = d.article
+        this.articleInfo.content = utils.imgTagAddStyle(this.articleInfo.content)
+        this.articleInfo.ut = this.timestampToTime(this.articleInfo.ut).slice(0, 10)
+        this.articleInfo.ct = this.timestampToTime(this.articleInfo.ct).slice(0, 10)
+        this.displayDesc = true
+        this.loading = false
+        window.scrollTo(0, 0)
+      })
+    },
+    nextPage () {
+      api.next(this.currentArticleId, (d) => {
+        this.articleInfo = d.article
+        this.articleInfo.content = utils.imgTagAddStyle(this.articleInfo.content)
+        this.articleInfo.ut = this.timestampToTime(this.articleInfo.ut).slice(0, 10)
+        this.articleInfo.ct = this.timestampToTime(this.articleInfo.ct).slice(0, 10)
+        this.displayDesc = true
+        this.loading = false
+        window.scrollTo(0, 0)
+      })
     }
   },
   created () {
     this.loading = true
     api.list((d) => {
       this.list = d.list
+    })
+    api.hotArticles((d) => {
+      let that = this
+      d.list.forEach(item => {
+        item.ut = that.timestampToTime(item.ut).slice(0, 10)
+        item.content = item.content.replace(/<[^>]+>/g, '')
+      })
+      this.hotList = d.list
     })
     this.pageInit.page = 1
     this.getArticle(this.pageInit)
@@ -979,7 +950,7 @@ export default {
                     }
 
                     .smart-post-list-main .text-left-of-excerpt {
-                        display: table-row;
+                        /*display: table-row;*/
                         *display: inline-block;
                     }
 
@@ -1072,9 +1043,11 @@ export default {
             padding: 5px 10px;
             border-top: 1px solid #d8d8d8;
             border-bottom: 1px solid #d8d8d8;
-
             .next {
                 text-align: right;
+            }
+            .pre,.next{
+                cursor: pointer;
             }
         }
         .re-list{
@@ -1129,7 +1102,6 @@ export default {
             }
 
             img {
-                height: auto;
                 max-width: 100%;
             }
             #jp-relatedposts .jp-relatedposts-items-visual h4.jp-relatedposts-post-title {
@@ -1157,6 +1129,28 @@ export default {
                 line-height: 20px;
                 margin: 0;
             }
+        }
+        .jp-relatedposts-post-excerpt{
+            text-overflow: -o-ellipsis-lastline;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            display: -webkit-box;
+            -webkit-line-clamp: 4;
+            line-clamp: 4;
+            -webkit-box-orient: vertical;
+        }
+        .smart-post-list-title{
+            text-overflow: -o-ellipsis-lastline;
+            overflow: hidden;
+            margin-left: 10px;
+            text-overflow: ellipsis;
+            display: -webkit-box;
+            -webkit-line-clamp: 4;
+            line-clamp: 4;
+            -webkit-box-orient: vertical;
+        }
+        .text-left-of-excerpt{
+
         }
 
     }

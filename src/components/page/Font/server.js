@@ -66,6 +66,29 @@ export default {
     }
     request.requestData(ws, attr, cb)
   },
+  next (id, cb) {
+    let attr = {
+      'obj': 'nextArticle',
+      'act': 'get',
+      'articleId': id
+    }
+    request.requestData(ws, attr, cb)
+  },
+  previous (id, cb) {
+    let attr = {
+      'obj': 'previousArticle',
+      'act': 'get',
+      'articleId': id
+    }
+    request.requestData(ws, attr, cb)
+  },
+  hotArticles (cb) {
+    let attr = {
+      'obj': 'hotArticles',
+      'act': 'list'
+    }
+    request.requestData(ws, attr, cb)
+  },
   websocket (cb) {
     let attr = {
       'obj': 'homeMenu',
