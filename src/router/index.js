@@ -29,6 +29,11 @@ let router = new Router({
           meta: { title: '文章列表' }
         },
         {
+          path: '/trashList',
+          component: resolve => require(['../components/page/Article/Trash/index.vue'], resolve),
+          meta: { title: '文章回收站' }
+        },
+        {
           path: '/tabs',
           component: resolve => require(['../components/page/Tabs.vue'], resolve),
           meta: { title: 'tab选项卡' }

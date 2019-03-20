@@ -468,21 +468,29 @@ export default {
       })
     },
     readMore (id) {
-      this.loading = true
-      this.currentArticleId = id
-      api.article(id, (d) => {
-        this.articleInfo = d.article
-        this.articleInfo.content = utils.imgTagAddStyle(this.articleInfo.content)
-        this.articleInfo.ut = this.timestampToTime(this.articleInfo.ut).slice(0, 10)
-        this.articleInfo.ct = this.timestampToTime(this.articleInfo.ct).slice(0, 10)
-        this.displayDesc = true
-        this.loading = false
-        d.relatedList.forEach(item => {
-          item.ut = this.timestampToTime(item.ut).slice(0, 10)
-          item.content = item.content.replace(/<[^>]+>/g, '')
-        })
-        this.relatedList = d.relatedList
+      this.$router.push({
+        path: '/front/detail',
+        query: {
+          id: id,
+          activeIndex2: this.activeIndex2,
+          r: Math.random()
+        }
       })
+      // this.loading = true
+      // this.currentArticleId = id
+      // api.article(id, (d) => {
+      //   this.articleInfo = d.article
+      //   this.articleInfo.content = utils.imgTagAddStyle(this.articleInfo.content)
+      //   this.articleInfo.ut = this.timestampToTime(this.articleInfo.ut).slice(0, 10)
+      //   this.articleInfo.ct = this.timestampToTime(this.articleInfo.ct).slice(0, 10)
+      //   this.displayDesc = true
+      //   this.loading = false
+      //   d.relatedList.forEach(item => {
+      //     item.ut = this.timestampToTime(item.ut).slice(0, 10)
+      //     item.content = item.content.replace(/<[^>]+>/g, '')
+      //   })
+      //   this.relatedList = d.relatedList
+      // })
     },
     op (item) {
       console.log(item)

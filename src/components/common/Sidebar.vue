@@ -50,6 +50,11 @@ export default {
         },
         {
           icon: 'el-icon-lx-cascades',
+          index: 'trashList',
+          title: '回收站'
+        },
+        {
+          icon: 'el-icon-lx-cascades',
           index: 'add',
           title: '文章上传'
         },
