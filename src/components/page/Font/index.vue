@@ -613,9 +613,26 @@ export default {
         this.loading = false
         window.scrollTo(0, 0)
       })
+    },
+    IsPC () {
+      var userAgentInfo = navigator.userAgent
+      var Agents = ['Android', 'iPhone',
+        'SymbianOS', 'Windows Phone',
+        'iPad', 'iPod']
+      var flag = true
+      for (var v = 0; v < Agents.length; v++) {
+        if (userAgentInfo.indexOf(Agents[v]) > 0) {
+          flag = false
+          break
+        }
+      }
+      return flag
     }
   },
   created () {
+    if (!this.IsPC()) {
+      window.location.href = 'http://localhost:8080/m/'
+    }
     this.loading = true
     api.list((d) => {
       this.list = d.list
