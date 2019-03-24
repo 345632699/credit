@@ -16,7 +16,7 @@
                 </el-form-item>
                 <el-form-item label="封面图">
                     <el-upload
-                        action="http://148.72.64.80/cgi-bin/upload.pl?proj=credit"
+                        action="https://www.uslazycreditcard.com/cgi-bin/upload.pl?proj=credit"
                         list-type="picture-card"
                         name="local_file"
                         :file-list="file_list"

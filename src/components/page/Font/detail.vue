@@ -92,7 +92,7 @@
                             </div>
                             <div class="bg-img" style="width: 100%">
                                 <img style="max-width: 95%"
-                                     :src="'http://148.72.64.80/cgi-bin/download.pl?proj=credit&fid=' + articleInfo.coverFid"
+                                     :src="'https://www.uslazycreditcard.com/cgi-bin/download.pl?proj=credit&fid=' + articleInfo.coverFid"
                                      alt="">
                             </div>
                             <div class="descripiton" v-html="articleInfo.content">
@@ -120,7 +120,7 @@
                                                     data-position="0">
                                                 <img
                                                         class="jp-relatedposts-post-img"
-                                                        :src="'http://148.72.64.80/cgi-bin/download.pl?proj=credit&fid=' + item.coverFid"
+                                                        :src="'https://www.uslazycreditcard.com/cgi-bin/download.pl?proj=credit&fid=' + item.coverFid"
                                                         width="350" height="144" :alt="item.tag">
                                             </a>
                                             <h4
@@ -175,7 +175,7 @@
                                                 data-position="0">
                                             <img
                                                     class="jp-relatedposts-post-img"
-                                                    :src="'http://148.72.64.80/cgi-bin/download.pl?proj=credit&fid=' + item.coverFid"
+                                                    :src="'https://www.uslazycreditcard.com/cgi-bin/download.pl?proj=credit&fid=' + item.coverFid"
                                                     width="350" height="144" :alt="item.tag">
                                         </a>
                                         <h4
@@ -216,7 +216,7 @@
                         </div>
                         <div class="flex">
                             <div class="left" @click="readMore(item._id)" style="cursor: pointer;">
-                                <img :src="'http://148.72.64.80/cgi-bin/download.pl?proj=credit&fid=' + item.coverFid"
+                                <img :src="'https://www.uslazycreditcard.com/cgi-bin/download.pl?proj=credit&fid=' + item.coverFid"
                                      alt="">
                             </div>
                             <div class="right">
@@ -274,7 +274,7 @@
                                                 href="#"><img
                                                 width="158" height="95"
                                                 style="border: 1px solid #d8d8d8;"
-                                                :src="'http://148.72.64.80/cgi-bin/download.pl?proj=credit&fid=' + item.coverFid"
+                                                :src="'https://www.uslazycreditcard.com/cgi-bin/download.pl?proj=credit&fid=' + item.coverFid"
                                                 class="smart-post-list-image"></a>
                                     </div>
                                     <div class="text-left-of-excerpt">

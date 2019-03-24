@@ -55,7 +55,7 @@
                     </el-form-item>
                     <el-form-item label="封面图">
                         <el-upload
-                            action="http://148.72.64.80/cgi-bin/upload.pl?proj=credit"
+                            action="https://www.uslazycreditcard.com/cgi-bin/upload.pl?proj=credit"
                             list-type="picture-card"
                             name="local_file"
                             limit="1"
@@ -248,9 +248,9 @@ export default {
         languageName: item.languageName,
         categoryName: item.categoryName,
         categoryId: item.categoryId,
-        file_list: [{ url: 'http://148.72.64.80/cgi-bin/download.pl?proj=credit&fid=' + item.coverFid }]
+        file_list: [{ url: 'https://www.uslazycreditcard.com/cgi-bin/download.pl?proj=credit&fid=' + item.coverFid }]
       }
-      this.file_list = [{ url: 'http://148.72.64.80/cgi-bin/download.pl?proj=credit&fid=' + item.coverFid }]
+      this.file_list = [{ url: 'https://www.uslazycreditcard.com/cgi-bin/download.pl?proj=credit&fid=' + item.coverFid }]
       this.editVisible = true
     },
     handleDelete (index, row) {
