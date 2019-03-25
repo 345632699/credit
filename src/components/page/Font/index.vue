@@ -381,12 +381,14 @@
                 </el-row>
             </el-row>
         </footer>
+        <scroll-top></scroll-top>
     </div>
 
 </template>
 
 <script>
 import api from './server'
+import ScrollTop from '@/components/common/ScrollTop.vue'
 import 'element-ui/lib/theme-chalk/display.css'
 import utils from '@/utils/utils'
 
@@ -628,6 +630,9 @@ export default {
       }
       return flag
     }
+  },
+  components: {
+    'scroll-top': ScrollTop
   },
   created () {
     if (!this.IsPC()) {
