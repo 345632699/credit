@@ -9,19 +9,19 @@
                              alt="">
                     </el-col>
                     <el-col :span="6">
-                        <el-input
-                                class="search"
-                                popper-class="my-autocomplete"
-                                v-model="pageInit.keyword"
-                                placeholder="请输入内容"
-                        >
-                            <i
-                                    class="el-icon-search el-input__icon"
-                                    slot="suffix"
-                                    style="cursor: pointer;"
-                                    @click="handleIconClick">
-                            </i>
-                        </el-input>
+                        <!--<el-input-->
+                                <!--class="search"-->
+                                <!--popper-class="my-autocomplete"-->
+                                <!--v-model="pageInit.keyword"-->
+                                <!--placeholder="请输入内容"-->
+                        <!--&gt;-->
+                            <!--<i-->
+                                    <!--class="el-icon-search el-input__icon"-->
+                                    <!--slot="suffix"-->
+                                    <!--style="cursor: pointer;"-->
+                                    <!--@click="handleIconClick">-->
+                            <!--</i>-->
+                        <!--</el-input>-->
                     </el-col>
                 </el-row>
             </div>
@@ -244,7 +244,7 @@
                         <el-input
                                 class="inner-search"
                                 popper-class="my-autocomplete"
-                                v-model="state3"
+                                v-model="pageInit.keyword"
                                 placeholder="请输入内容"
                                 style="width: 300px"
                         >
@@ -252,7 +252,7 @@
                                     class="el-icon-search el-input__icon"
                                     slot="suffix"
                                     style="cursor: pointer;"
-                                    @click="searchIn">
+                                    @click="handleIconClick">
                             </i>
                         </el-input>
                     </div>

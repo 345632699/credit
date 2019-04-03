@@ -12,8 +12,8 @@
                     <!--<el-option key="1" label="广东省" value="广东省"></el-option>-->
                     <!--<el-option key="2" label="湖南省" value="湖南省"></el-option>-->
                 <!--</el-select>-->
-                <!--<el-input v-model="select_word" placeholder="筛选关键词" class="handle-input mr10"></el-input>-->
-                <!--<el-button type="primary" icon="search" @click="search">搜索</el-button>-->
+                <el-input v-model="select_word" placeholder="筛选关键词" class="handle-input mr10"></el-input>
+                <el-button type="primary" icon="search" @click="search">搜索</el-button>
                 <el-button type="primary" icon="search" @click="() => {this.$router.push({path: '/add'})}">添加文章</el-button>
             </div>
             <el-table v-loading="loading" :data="articleList" border class="table" ref="multipleTable" @selection-change="handleSelectionChange">
@@ -211,7 +211,11 @@ export default {
         page: val,
         limit: 10
       }
-      this.getList(pageInit)
+      if (this.select_word) {
+        this.searchForList(pageInit)
+      } else {
+        this.getList(pageInit)
+      }
     },
     // 获取 easy-mock 的模拟数据
     getData () {
@@ -226,7 +230,28 @@ export default {
       })
     },
     search () {
+      this.pageInit.page = 1
       this.is_search = true
+      if (this.select_word) {
+        this.searchForList(this.pageInit)
+      } else {
+        this.getList(this.pageInit)
+      }
+      console.log(this.select_word)
+    },
+    searchForList (pageInit) {
+      this.loading = true
+      api.searchList(pageInit.page, pageInit.limit, this.select_word, (d) => {
+        console.log(d)
+        this.total = d.total
+        let that = this
+        d.list.forEach(item => {
+          item.ut = that.timestampToTime(item.ut).slice(0, 10)
+        })
+        this.articleList = d.list
+        this.loading = false
+      })
+      console.log(this.select_word)
     },
     formatter (row, column) {
       return row.address
@@ -295,6 +320,7 @@ export default {
     },
     getList (pageInit) {
       this.loading = true
+      this.cur_page = pageInit.page
       api.list(pageInit.page, pageInit.limit, (d) => {
         this.total = d.total
         let that = this

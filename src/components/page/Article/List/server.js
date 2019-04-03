@@ -9,6 +9,17 @@ export default {
       cb(d)
     })
   },
+  searchList (page, limit, keyword, cb) {
+    window.getData({
+      'obj': 'articleSearch',
+      'act': 'list',
+      'searchWord': keyword,
+      'page': page,
+      'limit': limit
+    }, (d) => {
+      cb(d)
+    })
+  },
   delete (id, cb) {
     window.getData({
       'obj': 'article',
